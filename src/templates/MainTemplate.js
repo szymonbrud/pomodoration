@@ -1,10 +1,10 @@
-import React from "react";
-import { ThemeProvider } from "styled-components";
-import { theme } from "assets/styles/theme";
-import GlobalStyle from "assets/styles/GlobalStyle";
-import PropTypes from "prop-types";
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { theme } from 'assets/styles/theme';
+import GlobalStyle from 'assets/styles/GlobalStyle';
+import propTypes from 'prop-types';
 
-//@TODO: Sprawdzić jak przestesować taki komponent
+// @TODO: Sprawdzić jak przestesować taki komponent
 
 const MainTemplate = ({ children }) => (
   <>
@@ -13,11 +13,11 @@ const MainTemplate = ({ children }) => (
   </>
 );
 
-MainTemplate.PropTypes = {
+MainTemplate.propTypes = {
   children: propTypes.oneOfType([
     propTypes.arrayOf(propTypes.node),
-    propTypes.node
-  ]).isRequired
+    propTypes.node,
+  ]).isRequired,
 };
 
 export default MainTemplate;

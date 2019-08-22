@@ -1,30 +1,21 @@
 {
   "extends": ["react-app", "airbnb"],
-  "parser": "babel-eslint",
-  "env": {
-    "jest": true
-  },
   "rules": {
-    "camelcase": 0,
-    "import/prefer-default-export": 0,
-    "import/no-extraneous-dependencies": 0,
-    "import/no-unresolved": 1,
-    "no-restricted-syntax": 0,
     "linebreak-style": 0,
     "react/jsx-filename-extension": [
       1,
       {
         "extensions": [".js", ".jsx"]
       }
-    ],
-    "settings": {
-      "import/resolver": {
-        "node": {
-          "paths": ["./src"],
-          "extensions": [".js", ".jsx", ".ts", ".tsx"]
-        }
+    ]
+    // "prettier.eslintIntegration": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
-    // "prettier.eslintIntegration": true
   }
 }

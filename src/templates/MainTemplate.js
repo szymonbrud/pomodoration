@@ -4,8 +4,6 @@ import { theme } from 'assets/styles/theme';
 import GlobalStyle from 'assets/styles/GlobalStyle';
 import propTypes from 'prop-types';
 
-// @TODO: Sprawdzić jak przestesować taki komponent
-
 const MainTemplate = ({ children }) => (
   <>
     <GlobalStyle />
@@ -14,10 +12,7 @@ const MainTemplate = ({ children }) => (
 );
 
 MainTemplate.propTypes = {
-  children: propTypes.oneOfType([
-    propTypes.arrayOf(propTypes.node),
-    propTypes.node,
-  ]).isRequired,
+  children: propTypes.oneOfType([propTypes.arrayOf(propTypes.node), propTypes.node]).isRequired,
 };
 
 export default MainTemplate;

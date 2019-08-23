@@ -1,57 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MainTemplate from 'templates/MainTemplate';
-import {
-  BrowserRouter, Route, Switch, Redirect,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoginTemplate from 'templates/LoginTemplate';
 import TimerTemplate from 'templates/TimerTemplate';
-import * as firebase from 'firebase';
 import 'firebase/auth';
-import withFirebaseAuth from 'react-with-firebase-auth';
-import { firebaseApp } from './firebaseConfig';
+import PrivateRoute from 'components/PrivateRoute.js/PrivateRoute';
+import { AuthProvider } from './Auth';
 
-// const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-
-const App = ({ user, signOut, signInWithGoogle }) => {
-  console.log(user);
-  console.log(firebase.auth().currentUser.uid);
-  const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={(props) => (user ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/',
-            state: { from: props.location },
-          }}
-        />
-      ))}
-    />
-  );
-
+const App = () => {
   return (
-    <BrowserRouter>
-      <MainTemplate>
-        <Switch>
-          <PrivateRoute exact path="/timer" component={TimerTemplate} />
-          <Route exact path="/" component={LoginTemplate} />
-        </Switch>
-      </MainTemplate>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <MainTemplate>
+          <Switch>
+            <PrivateRoute exact path="/timer" component={TimerTemplate} />
+            <Route exact path="/" component={LoginTemplate} />
+          </Switch>
+        </MainTemplate>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
-
-const firebaseAppAuth = firebaseApp.auth();
-
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-};
-
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth,
-})(App);
+export default App;

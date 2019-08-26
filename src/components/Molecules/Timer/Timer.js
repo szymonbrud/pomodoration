@@ -1,46 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
+const StyledTimerWarpper = styled.div`
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+`;
 
 const StyledTimer = styled.h1`
   font-size: 3.6rem;
   color: ${({ theme }) => theme.blue};
-  margin: 20vh auto;
+`;
+
+const WrapperButtons = styled.div`
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Timer = () => {
-  const defaultTime = 150;
-  let s = 150;
-  let lol;
+  const [secounds, setSecounds] = useState('00');
+  const [minutes, setMinutes] = useState(25);
+  const [myInterval, setMyInterval] = useState();
+  const [currentSecounds, setCurrentSecounds] = useState(1500);
+
+  const addZero = item => {
+    return item < 10 ? `0${item}` : item;
+  };
+
+  const defaultTime = 1500;
+
   const run = () => {
-    lol = setInterval(() => {
-      if (s === 0) {
-        clearInterval(lol);
-      } else {
-        s -= 1;
-      }
-      let m = Math.floor(s / 60);
-      m %= 60;
-      console.log(`minuty: ${m}, sekundy: ${s % 60}`);
-    }, 1000);
+    setMyInterval(
+      setInterval(() => {
+        if (currentSecounds === 0) {
+          clearInterval(myInterval);
+        } else {
+          setCurrentSecounds(currentSecounds - 1);
+        }
+        let min = Math.floor(currentSecounds / 60);
+        min %= 60;
+        const sec = currentSecounds % 60;
+
+        setSecounds(addZero(sec));
+        setMinutes(addZero(min));
+      }, 1000),
+    );
   };
+
   const pauseTimer = () => {
-    clearInterval(lol);
+    clearInterval(myInterval);
+    console.log(currentSecounds);
   };
+
   const reset = () => {
-    clearInterval(lol);
-    s = defaultTime;
+    setSecounds('00');
+    setMinutes(25);
+    setCurrentSecounds(defaultTime);
+    clearInterval(myInterval);
   };
 
   return (
-    <>
+    <StyledTimerWarpper>
       <StyledTimer>
-        time
-        {/* {minutes} : {secounds} */}
+        {minutes} : {secounds}
       </StyledTimer>
-      <button onClick={() => run()}>frf</button>
-      <button onClick={() => pauseTimer()}>pause</button>
-      <buton onClick={() => reset()}>reset</buton>
-    </>
+      <WrapperButtons>
+        <button onClick={() => run()}>frf</button>
+        <button onClick={() => pauseTimer()}>pause</button>
+        <button onClick={() => reset()}>reset</button>
+      </WrapperButtons>
+    </StyledTimerWarpper>
   );
 };
 

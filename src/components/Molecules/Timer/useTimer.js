@@ -6,46 +6,47 @@ const addZero = item => {
 };
 
 const useTimer = startTime => {
-  const [test, setTest] = useState(startTime);
-  const [timer, setTimer] = useState('reset');
+  const [currentTimer, setCurrentTimer] = useState(startTime);
+  const [actionTimer, setActionsTimer] = useState('reset');
 
   useEffect(() => {
-    let myTimer;
-    if (timer === 'run') {
-      myTimer = setInterval(() => {
-        setTest(prev => prev - 1);
+    let myInterval;
+    if (actionTimer === 'run') {
+      myInterval = setInterval(() => {
+        setCurrentTimer(prev => prev - 1);
       }, 100);
-    } else if (timer === 'reset') {
-      setTest(startTime);
+    } else if (actionTimer === 'reset') {
+      setCurrentTimer(startTime);
     }
     return () => {
-      clearInterval(myTimer);
+      clearInterval(myInterval);
     };
-  }, [timer]);
+  }, [actionTimer]);
 
-  let sec = test % 60;
+  // @TODO: review these
+  let sec = currentTimer % 60;
   sec = addZero(sec);
-  const minutes = Math.floor(test / 60);
+  const minutes = Math.floor(currentTimer / 60);
   let min = minutes % 60;
   min = addZero(min);
 
   let buttons;
-  if (timer === 'reset') {
-    buttons = <TimerButton onClick={() => setTimer('run')}>start</TimerButton>;
-  } else if (timer === 'pause') {
+  if (actionTimer === 'reset') {
+    buttons = <TimerButton onClick={() => setActionsTimer('run')}>start</TimerButton>;
+  } else if (actionTimer === 'pause') {
     buttons = (
       <>
-        <TimerButton red onClick={() => setTimer('reset')}>
+        <TimerButton red onClick={() => setActionsTimer('reset')}>
           reset
         </TimerButton>
-        <TimerButton blue onClick={() => setTimer('run')}>
+        <TimerButton blue onClick={() => setActionsTimer('run')}>
           wznów
         </TimerButton>
       </>
     );
   } else {
     buttons = (
-      <TimerButton blue onClick={() => setTimer('pause')}>
+      <TimerButton blue onClick={() => setActionsTimer('pause')}>
         pause
       </TimerButton>
     );
@@ -53,8 +54,8 @@ const useTimer = startTime => {
 
   return {
     buttons,
-    sec,
-    min,
+    secounds: sec,
+    minutes: min,
   };
 };
 

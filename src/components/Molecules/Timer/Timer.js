@@ -27,12 +27,12 @@ const WrapperButtons = styled.div`
 `;
 
 const Timer = () => {
-  const { min, sec, buttons } = useTimer(1500);
+  const { minutes, secounds, buttons } = useTimer(1500);
 
   return (
     <StyledTimerWarpper>
       <StyledTimer>
-        {min} : {sec}
+        {minutes} : {secounds}
       </StyledTimer>
       <WrapperButtons>{buttons}</WrapperButtons>
     </StyledTimerWarpper>

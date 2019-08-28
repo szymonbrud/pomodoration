@@ -1,79 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import TimerButton from 'components/Atoms/TimerButton/TimerButton';
-import firebase from 'firebase';
-
-const getNowTime = () => {
-  const date = new Date();
-  const dateMonth = date.getMonth();
-  const dateDay = date.getDate();
-  const dateYear = date.getFullYear();
-  const dateHours = date.getHours();
-  const dateMinutes = date.getMinutes();
-  const dateSecound = date.getSeconds();
-
-  return {
-    dateMonth,
-    dateDay,
-    dateYear,
-    dateHours,
-    dateMinutes,
-    dateSecound,
-  };
-};
-
-const safeTodataBase = () => {
-  const nowTime = getNowTime();
-
-  const time = new Date(
-    nowTime.dateYear,
-    nowTime.dateMonth,
-    nowTime.dateDay,
-    nowTime.dateHours,
-    nowTime.dateMinutes,
-    nowTime.dateSecound + 1500,
-  );
-
-  return time.getTime();
-};
-
-const funcPrzypisz = () => {
-  const willTime = safeTodataBase();
-
-  const userId = firebase.auth().currentUser.uid;
-  firebase
-    .database()
-    .ref(`/users/${userId}`)
-    .set(
-      {
-        time: willTime,
-      },
-      error => {
-        error ? console.log(error) : console.log('brawo działa :D');
-      },
-    );
-};
+import { SendRunAction, SendPauseAction, SendResetAction } from './Requests';
 
 const addZero = item => {
   return item < 10 ? `0${item}` : item;
 };
 
-const useTimer = startTime => {
-  console.log(startTime);
-  const [currentTimer, setCurrentTimer] = useState(startTime);
-  // to też powinno być pobierane z bazy danych
-  const [actionTimer, setActionsTimer] = useState('reset');
-
+const useTimer = (startTime, status) => {
+  const [currentTimer, setCurrentTimer] = useState();
+  const [actionTimer, setActionsTimer] = useState();
+  const [off, setOff] = useState(false);
   useEffect(() => {
-    console.log('xd');
-    if (startTime && actionTimer !== 'pause' && actionTimer !== 'reset' && startTime > 0) {
-      setActionsTimer('run');
-    }
+    if (startTime !== undefined && status !== undefined) {
+      if (status === 'run' && startTime > 0 && !off) {
+        setActionsTimer(status);
+        setCurrentTimer(startTime);
+        setOff(true);
+      }
 
+      if ((status === 'pause' && !off) || (startTime === 0 && !off)) {
+        setActionsTimer('pause');
+        setCurrentTimer(startTime);
+        setOff(true);
+      }
+    }
+    if (status === 'reset' && !off) {
+      setActionsTimer('reset');
+      setOff(true);
+    }
     let myInterval;
     if (actionTimer === 'run') {
       myInterval = setInterval(() => {
         setCurrentTimer(prev => prev - 1);
-        console.log(currentTimer);
       }, 1000);
     } else if (actionTimer === 'reset') {
       setCurrentTimer(1500);
@@ -82,9 +40,8 @@ const useTimer = startTime => {
     return () => {
       clearInterval(myInterval);
     };
-  }, [actionTimer, startTime]);
+  }, [actionTimer, startTime, status]);
 
-  // @TODO: review these
   let sec = currentTimer % 60;
   sec = addZero(sec);
   const minutes = Math.floor(currentTimer / 60);
@@ -93,9 +50,17 @@ const useTimer = startTime => {
 
   const runApp = () => {
     setActionsTimer('run');
-    // addUserToFirebase();
-    // safeTodataBase();
-    funcPrzypisz();
+    SendRunAction(currentTimer);
+  };
+
+  const pauseApp = () => {
+    setActionsTimer('pause');
+    SendPauseAction(currentTimer);
+  };
+
+  const resetApp = () => {
+    setActionsTimer('reset');
+    SendResetAction();
   };
 
   let buttons;
@@ -104,17 +69,17 @@ const useTimer = startTime => {
   } else if (actionTimer === 'pause') {
     buttons = (
       <>
-        <TimerButton red onClick={() => setActionsTimer('reset')}>
+        <TimerButton red onClick={() => resetApp('reset')}>
           reset
         </TimerButton>
-        <TimerButton blue onClick={() => setActionsTimer('run')}>
+        <TimerButton blue onClick={() => runApp()}>
           wznów
         </TimerButton>
       </>
     );
   } else {
     buttons = (
-      <TimerButton blue onClick={() => setActionsTimer('pause')}>
+      <TimerButton blue onClick={() => pauseApp()}>
         pause
       </TimerButton>
     );

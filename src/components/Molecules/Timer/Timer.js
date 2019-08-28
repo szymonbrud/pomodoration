@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import firebase from 'firebase';
+import { firebaseApp } from 'firebaseConfig';
 import useTimer from './useTimer';
 
 const StyledTimerWarpper = styled.div`
@@ -27,7 +29,43 @@ const WrapperButtons = styled.div`
 `;
 
 const Timer = () => {
-  const { minutes, secounds, buttons } = useTimer(1500);
+  const database = firebase.database();
+  const [timeBase, setTimeBase] = useState(false);
+  const [ItsTime, setItsTime] = useState();
+
+  useEffect(() => {
+    // console.log('właśnie wszedłem');
+    const usersObject = database.ref().child(`users/${firebase.auth().currentUser.uid}`);
+    usersObject.on('value', snap => {
+      if (snap.val()) {
+        setTimeBase(snap.val().time);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (timeBase) {
+      const myDate = new Date();
+      const myNowTimer = myDate.getTime();
+      const minusTime = timeBase - myNowTimer;
+      const timeee = Math.floor(minusTime / 1000);
+      console.log(timeee);
+      console.log('szymon');
+      setItsTime(timeee);
+    }
+  }, [timeBase]);
+  // timeee %= 60;
+  // console.log(timeee + 1500);
+  // // const lastTime = timeee + 1500;
+  // const lastTime = timeee;
+
+  // // console.log(timeBase);
+  console.log(ItsTime);
+  console.log('xdfff');
+  if (ItsTime < 0) {
+    setItsTime(0);
+  }
+  const { minutes, secounds, buttons } = useTimer(ItsTime);
 
   return (
     <StyledTimerWarpper>

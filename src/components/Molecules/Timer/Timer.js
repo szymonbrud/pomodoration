@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import firebase from 'firebase';
+import { firebaseApp } from 'firebaseConfig';
 import useTimer from './useTimer';
 
 const StyledTimerWarpper = styled.div`
@@ -27,46 +27,11 @@ const WrapperButtons = styled.div`
   justify-content: space-around;
 `;
 
-const Timer = () => {
-  const database = firebase.database();
-  const [timeBase, setTimeBase] = useState(false);
-  const [ItsTime, setItsTime] = useState();
-  const [status, setStatus] = useState();
-
-  useEffect(() => {
-    const usersObject = database.ref().child(`users/${firebase.auth().currentUser.uid}/timer`);
-    usersObject.on('value', snap => {
-      if (snap.val()) {
-        setTimeBase(snap.val().time);
-        setStatus(snap.val().status);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    if (timeBase && status) {
-      if (status === 'run') {
-        const myDate = new Date();
-        const myNowTimer = myDate.getTime();
-        const minusTime = timeBase - myNowTimer;
-        const timeee = Math.floor(minusTime / 1000);
-        setItsTime(timeee);
-      } else if (timeBase < 0 && status !== 'run') {
-        setItsTime(0);
-      } else {
-        setItsTime(timeBase);
-      }
-    }
-  }, [timeBase, status]);
-
-  if (ItsTime < 0) {
-    setItsTime(0);
-  }
-
+const Timer = ({ ItsTime, status }) => {
   const { minutes, secounds, buttons } = useTimer(ItsTime, status);
   return (
-    <StyledTimerWarpper>
-      <StyledTimer>
+    <StyledTimerWarpper data-test="timerWrapper">
+      <StyledTimer data-testid="counter">
         {minutes} : {secounds}
       </StyledTimer>
       <WrapperButtons>{buttons}</WrapperButtons>

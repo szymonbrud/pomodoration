@@ -73,7 +73,7 @@ const useTimer = (startTime, status) => {
           reset
         </TimerButton>
         <TimerButton blue onClick={() => runApp()}>
-          wznów
+          wznow
         </TimerButton>
       </>
     );

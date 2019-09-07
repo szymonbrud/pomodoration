@@ -1,26 +1,8 @@
 import firebase from 'firebase';
-
-const getNowTime = () => {
-  const date = new Date();
-  const dateMonth = date.getMonth();
-  const dateDay = date.getDate();
-  const dateYear = date.getFullYear();
-  const dateHours = date.getHours();
-  const dateMinutes = date.getMinutes();
-  const dateSecound = date.getSeconds();
-
-  return {
-    dateMonth,
-    dateDay,
-    dateYear,
-    dateHours,
-    dateMinutes,
-    dateSecound,
-  };
-};
+import { getCurrentTime } from 'functions';
 
 const safeTodataBase = currentTime => {
-  const nowTime = getNowTime();
+  const nowTime = getCurrentTime();
 
   const time = new Date(
     nowTime.dateYear,
@@ -30,7 +12,6 @@ const safeTodataBase = currentTime => {
     nowTime.dateMinutes,
     nowTime.dateSecound + currentTime,
   );
-
   return time.getTime();
 };
 

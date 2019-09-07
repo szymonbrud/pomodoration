@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { firebaseApp } from 'firebaseConfig';
+import propTypes from 'prop-types';
 import useTimer from './useTimer';
 
 const StyledTimerWarpper = styled.div`
@@ -30,13 +30,29 @@ const WrapperButtons = styled.div`
 const Timer = ({ ItsTime, status }) => {
   const { minutes, secounds, buttons } = useTimer(ItsTime, status);
   return (
-    <StyledTimerWarpper data-test="timerWrapper">
-      <StyledTimer data-testid="counter">
-        {minutes} : {secounds}
-      </StyledTimer>
-      <WrapperButtons>{buttons}</WrapperButtons>
+    <StyledTimerWarpper>
+      {status === undefined ? (
+        <h1>ładowanie...</h1>
+      ) : (
+        <>
+          <StyledTimer>
+            {minutes} : {secounds}
+          </StyledTimer>
+          <WrapperButtons>{buttons}</WrapperButtons>
+        </>
+      )}
     </StyledTimerWarpper>
   );
+};
+
+Timer.propTypes = {
+  ItsTime: propTypes.number,
+  status: propTypes.string,
+};
+
+Timer.defaultProps = {
+  ItsTime: undefined,
+  status: undefined,
 };
 
 export default Timer;

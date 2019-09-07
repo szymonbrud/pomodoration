@@ -14,6 +14,7 @@
     "expect": true,
     "jest": true,
     "beforeEach": true,
+    "document": true,
   },
   "rules": {
     "react/jsx-props-no-spreading": 0,

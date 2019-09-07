@@ -1,11 +1,11 @@
 import thunk from 'redux-thunk';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import { timerState } from 'reducers';
 
 const allStoreEnchancers = compose(
   applyMiddleware(thunk),
-  composeWithDevTools(),
+  // composeWithDevTools(),
 );
 
 const allReducers = combineReducers({

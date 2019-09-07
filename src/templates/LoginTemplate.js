@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import 'firebase/auth';
 import withFirebaseAuth from 'react-with-firebase-auth';
 import { Redirect } from 'react-router-dom';
@@ -39,7 +39,9 @@ const LoginTemplate = ({ user, signOut, signInWithGoogle }) => {
   }
 
   const LoginAction = () => {
-    signInWithGoogle();
+    // signInWithGoogle();
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebaseApp.auth().signInWithRedirect(provider);
     setCurrentLogin(true);
   };
 

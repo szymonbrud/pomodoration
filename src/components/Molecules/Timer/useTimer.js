@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TimerButton from 'components/Atoms/TimerButton/TimerButton';
 import { addZero } from 'functions';
+import SetName from 'components/Molecules/SetName/SetName';
 import { SendRunAction, SendPauseAction, SendResetAction } from './Requests';
 
 const useTimer = (startTime, status) => {
@@ -66,7 +67,12 @@ const useTimer = (startTime, status) => {
 
   let buttons;
   if (actionTimer === 'reset') {
-    buttons = <TimerButton onClick={() => runApp()}>start</TimerButton>;
+    buttons = (
+      <>
+        <SetName />
+        <TimerButton onClick={() => runApp()}>start</TimerButton>
+      </>
+    );
   } else if (actionTimer === 'pause') {
     buttons = (
       <>

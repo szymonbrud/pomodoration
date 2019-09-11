@@ -5,25 +5,27 @@ import useTimer from './useTimer';
 
 const StyledTimerWarpper = styled.div`
   width: 100%;
-  height: 40vh;
+  height: 60vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   flex-direction: column;
   position: relative;
 `;
 
 const StyledTimer = styled.h1`
+  margin-top: 15vh;
   font-size: 3.6rem;
   color: ${({ theme }) => theme.blue};
 `;
 
 const WrapperButtons = styled.div`
   width: 100%;
-  position: absolute;
-  bottom: 0;
+  /* position: absolute; */
+  /* bottom: 0; */
   display: flex;
-  align-items: center;
+  margin-top: 10vh;
+  /* align-items: center; */
   justify-content: space-around;
 `;
 

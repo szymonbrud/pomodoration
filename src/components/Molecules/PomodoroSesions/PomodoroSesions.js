@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const StyledMainWrapper = styled.div`
@@ -11,10 +10,4 @@ const StyledMainWrapper = styled.div`
   left: 12%;
 `;
 
-const PomodoroSesions = () => (
-  <>
-    <StyledMainWrapper />
-  </>
-);
-
-export default PomodoroSesions;
+export default StyledMainWrapper;

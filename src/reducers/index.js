@@ -1,8 +1,13 @@
-const initialState = {
-  action: '',
-  nameOfCurrentWork: '',
-};
+import { POMODORO_NAME } from 'actions';
 
-export const timerState = (state = initialState, action) => {
-  return state;
+export const pomdoroName = (state = { name: '' }, { type, payload }) => {
+  switch (type) {
+    case POMODORO_NAME:
+      return {
+        ...state,
+        name: payload.name,
+      };
+    default:
+      return state;
+  }
 };

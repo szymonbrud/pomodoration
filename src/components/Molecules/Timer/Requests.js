@@ -15,7 +15,7 @@ const safeTodataBase = currentTime => {
   return time.getTime();
 };
 
-export const SendRunAction = currentTime => {
+export const SendRunAction = (currentTime, name = '') => {
   const willTime = safeTodataBase(currentTime);
 
   const userId = firebase.auth().currentUser.uid;
@@ -26,6 +26,7 @@ export const SendRunAction = currentTime => {
       {
         time: willTime,
         status: 'run',
+        name,
       },
       error => {
         error && console.log(error);
@@ -33,12 +34,13 @@ export const SendRunAction = currentTime => {
     );
 };
 
-export const SendPauseAction = time => {
+export const SendPauseAction = (time, name = '') => {
+  console.log(name);
   const userId = firebase.auth().currentUser.uid;
   firebase
     .database()
     .ref(`/users/${userId}/timer`)
-    .set({ time, status: 'pause' }, err => {
+    .set({ time, status: 'pause', name }, err => {
       err && console.log(err);
     });
 };

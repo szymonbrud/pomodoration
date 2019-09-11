@@ -29,8 +29,8 @@ const WrapperButtons = styled.div`
   justify-content: space-around;
 `;
 
-const Timer = ({ ItsTime, status }) => {
-  const { minutes, secounds, buttons } = useTimer(ItsTime, status);
+const Timer = ({ ItsTime, status, name }) => {
+  const { minutes, secounds, buttons } = useTimer(ItsTime, status, name);
   return (
     <StyledTimerWarpper>
       {status === undefined ? (

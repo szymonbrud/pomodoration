@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import NewInput from 'components/Molecules/Input/Input';
 import { Formik } from 'formik';
 import { pomodoroName } from 'actions';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const StyledMainWrapper = styled.div`
@@ -68,10 +68,10 @@ const StyledButton = styled.button`
 `;
 
 // TODO: tests
-const SetNewNameBottomPanel = ({ action, open, setPomodoroName }) => {
+const SetNewNameBottomPanel = ({ action, open }) => {
   const dispatch = useDispatch();
   const sedToRedux = name => {
-    dispatch(setPomodoroName(name));
+    dispatch(pomodoroName(name));
   };
 
   return (
@@ -117,18 +117,10 @@ const SetNewNameBottomPanel = ({ action, open, setPomodoroName }) => {
 SetNewNameBottomPanel.propTypes = {
   action: PropTypes.func.isRequired,
   open: PropTypes.bool,
-  setPomodoroName: PropTypes.func.isRequired,
 };
 
 SetNewNameBottomPanel.defaultProps = {
   open: false,
 };
 
-const mapActionToProps = () => ({
-  setPomodoroName: pomodoroName,
-});
-
-export default connect(
-  null,
-  mapActionToProps,
-)(SetNewNameBottomPanel);
+export default SetNewNameBottomPanel;

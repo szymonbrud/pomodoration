@@ -6,6 +6,7 @@ const TimerWrapper = ({ children }) => {
   const [timeBase, setTimeBase] = useState(false);
   const [ItsTime, setItsTime] = useState();
   const [status, setStatus] = useState();
+  const [name, setName] = useState();
 
   useEffect(() => {
     const usersObject = database.ref().child(`users/${firebase.auth().currentUser.uid}/timer`);
@@ -13,6 +14,7 @@ const TimerWrapper = ({ children }) => {
       if (snap.val()) {
         setTimeBase(snap.val().time);
         setStatus(snap.val().status);
+        setName(snap.val().name);
       }
     });
   }, []);
@@ -37,7 +39,7 @@ const TimerWrapper = ({ children }) => {
     setItsTime(0);
   }
 
-  return children({ ItsTime, status });
+  return children({ ItsTime, status, name });
 };
 
 export default TimerWrapper;

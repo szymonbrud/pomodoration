@@ -21,7 +21,9 @@ const MainContent = () => (
       <PomodoroSesions />
       <PomodoroSettings />
       <TimerWrapper>
-        {({ ItsTime, status }) => <Timer data-testid="timer" ItsTime={ItsTime} status={status} />}
+        {({ ItsTime, status, name }) => (
+          <Timer data-testid="timer" ItsTime={ItsTime} status={status} name={name} />
+        )}
       </TimerWrapper>
     </StyledMainWrapper>
   </>

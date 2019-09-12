@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, render } from 'enzyme';
 import { checkProps, findByTestAtrr } from 'Utils';
 import Timer from './Timer';
 
@@ -38,20 +38,6 @@ describe('Timer', () => {
     it('Should NOT throw a warning, status Bad Props', () => {
       const propsError = checkProps(Timer, expectedBadProps);
       expect(propsError).toBeDefined();
-    });
-  });
-  describe('Checking render', () => {
-    let wrapper;
-    beforeEach(() => {
-      const props = {
-        status: 'run',
-        ItsTime: 1000,
-      };
-      wrapper = shallow(<Timer {...props} />);
-    });
-    it('Should render a button pause', () => {
-      const button = findByTestAtrr(wrapper, 'pauseButton');
-      expect(button.length).toBe(1);
     });
   });
 });

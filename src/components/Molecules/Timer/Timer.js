@@ -8,7 +8,6 @@ const StyledTimerWarpper = styled.div`
   height: 60vh;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   flex-direction: column;
   position: relative;
 `;
@@ -21,16 +20,13 @@ const StyledTimer = styled.h1`
 
 const WrapperButtons = styled.div`
   width: 100%;
-  /* position: absolute; */
-  /* bottom: 0; */
   display: flex;
   margin-top: 10vh;
-  /* align-items: center; */
   justify-content: space-around;
 `;
 
-const Timer = ({ ItsTime, status, name }) => {
-  const { minutes, secounds, buttons } = useTimer(ItsTime, status, name);
+const Timer = ({ ItsTime, status }) => {
+  const { minutes, secounds, buttons } = useTimer(ItsTime, status);
   return (
     <StyledTimerWarpper>
       {status === undefined ? (

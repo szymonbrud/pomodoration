@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import firebase from 'firebase';
+import { useDispatch } from 'react-redux';
+import { pomodoroName } from 'actions';
 
 const TimerWrapper = ({ children }) => {
   const database = firebase.database();
   const [timeBase, setTimeBase] = useState(false);
   const [ItsTime, setItsTime] = useState();
   const [status, setStatus] = useState();
-  const [name, setName] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const usersObject = database.ref().child(`users/${firebase.auth().currentUser.uid}/timer`);
@@ -14,7 +16,7 @@ const TimerWrapper = ({ children }) => {
       if (snap.val()) {
         setTimeBase(snap.val().time);
         setStatus(snap.val().status);
-        setName(snap.val().name);
+        dispatch(pomodoroName(snap.val().name));
       }
     });
   }, []);
@@ -39,7 +41,7 @@ const TimerWrapper = ({ children }) => {
     setItsTime(0);
   }
 
-  return children({ ItsTime, status, name });
+  return children({ ItsTime, status });
 };
 
 export default TimerWrapper;

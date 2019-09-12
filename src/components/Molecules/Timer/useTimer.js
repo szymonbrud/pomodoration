@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import TimerButton from 'components/Atoms/TimerButton/TimerButton';
 import { addZero } from 'functions';
-import SetName from 'components/Molecules/SetName/SetName';
-import NameOfPomodoro from 'components/Molecules/NameOfPomodoro/NameOfPomodoro';
 import { useSelector, useDispatch } from 'react-redux';
 import { pomodoroName } from 'actions';
+import InterfaceSwitchButtonsRender from 'components/Molecules/Timer/InterfaceSwitchButtonsRender';
 import { SendRunAction, SendPauseAction, SendResetAction } from './Requests';
 
-const useTimer = (startTime, status, name) => {
-  const dispatch = useDispatch();
+const useTimer = (startTime, status) => {
   const [currentTime, setcurrentTime] = useState();
   const [actionTimer, setActionsTimer] = useState();
   const [off, setOff] = useState(false);
   const nameOfPomodoroState = useSelector(state => state.pomdoroName);
-  // console.log(name);
 
   useEffect(() => {
-    if (name && nameOfPomodoroState.name) {
-      dispatch(pomodoroName(name));
-    }
     if (startTime !== undefined && status !== undefined) {
       if (status === 'run' && startTime > 0 && !off) {
         setActionsTimer(status);
@@ -36,7 +29,7 @@ const useTimer = (startTime, status, name) => {
       setActionsTimer('reset');
       setOff(true);
     }
-  }, [startTime, status, name]);
+  }, [startTime, status]);
 
   useEffect(() => {
     let myInterval;
@@ -61,12 +54,12 @@ const useTimer = (startTime, status, name) => {
 
   const runApp = () => {
     setActionsTimer('run');
-    SendRunAction(currentTime, nameOfPomodoroState.name || name);
+    SendRunAction(currentTime, nameOfPomodoroState.name);
   };
 
   const pauseApp = () => {
     setActionsTimer('pause');
-    SendPauseAction(currentTime, name);
+    SendPauseAction(currentTime, nameOfPomodoroState.name);
   };
 
   const resetApp = () => {
@@ -74,36 +67,15 @@ const useTimer = (startTime, status, name) => {
     SendResetAction();
   };
 
-  let buttons;
-  if (actionTimer === 'reset') {
-    buttons = (
-      <>
-        <SetName />
-        <TimerButton onClick={() => runApp()}>start</TimerButton>
-      </>
-    );
-  } else if (actionTimer === 'pause') {
-    buttons = (
-      <>
-        <TimerButton red onClick={() => resetApp('reset')} data-test="pauseButton">
-          reset
-        </TimerButton>
-        <TimerButton blue onClick={() => runApp()} data-test="pauseButton">
-          wznow
-        </TimerButton>
-        <NameOfPomodoro name={name} />
-      </>
-    );
-  } else {
-    buttons = (
-      <>
-        <TimerButton blue onClick={() => pauseApp()} data-test="pauseButton">
-          pause
-        </TimerButton>
-        <NameOfPomodoro name={name} />
-      </>
-    );
-  }
+  const buttons = (
+    <InterfaceSwitchButtonsRender
+      pauseApp={pauseApp}
+      runApp={runApp}
+      resetApp={resetApp}
+      currentAction={actionTimer}
+      name={nameOfPomodoroState.name}
+    />
+  );
 
   return {
     buttons,

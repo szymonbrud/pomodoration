@@ -51,7 +51,8 @@ const LoginTemplate = ({ user, signOut, signInWithGoogle }) => {
 
   return (
     <StyledMainWrapper>
-      <H2>Hello</H2>
+      <H2 id="h2">Hello</H2>
+      {/* onClick={() => ServiceWorkerGlobalScope.onnotificationclick} */}
       <H1>Pomodoro app</H1>
       {user ? (
         <>

@@ -14,14 +14,14 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
-askForPermissioToReceiveNotifications();
+// askForPermissioToReceiveNotifications();
 
 // wywołanie powiadomienia
 
-axios.post('https://us-central1-pomodoro-app-test-a03e7.cloudfunctions.net/apiResponse', {
-  body: {},
-  headers: {},
-});
+// axios.post('https://us-central1-pomodoro-app-test-a03e7.cloudfunctions.net/apiResponse', {
+//   body: {},
+//   headers: {},
+// });
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

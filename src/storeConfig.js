@@ -5,7 +5,7 @@ import { pomdoroName } from 'reducers';
 
 const allStoreEnchancers = compose(
   applyMiddleware(thunk),
-  composeWithDevTools(),
+  // composeWithDevTools(),
 );
 
 const allReducers = combineReducers({

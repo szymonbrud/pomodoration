@@ -4,6 +4,7 @@ import PomodoroSesions from 'components/Molecules/PomodoroSesions/PomodoroSesion
 import PomodoroSettings from 'components/Molecules/PomodoroSettings/PomodoroSettings';
 import Timer from 'components/Molecules/Timer/Timer';
 import TimerWrapper from 'components/Molecules/Timer/TimerWrapper';
+import ShowHistoryOfTimeButton from 'components/Molecules/ShowHistoryOfTimeButton/ShowHistoryOfTimeButton';
 
 const StyledMainWrapper = styled.div`
   position: relative;
@@ -25,6 +26,7 @@ const MainContent = () => (
           <Timer data-testid="timer" ItsTime={ItsTime} status={status} name={name} />
         )}
       </TimerWrapper>
+      <ShowHistoryOfTimeButton />
     </StyledMainWrapper>
   </>
 );

@@ -14,7 +14,7 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
-// askForPermissioToReceiveNotifications();
+askForPermissioToReceiveNotifications();
 
 // wywołanie powiadomienia
 

@@ -1,78 +1,121 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import ReactSwipe from 'react-swipe';
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
+import HistoryPomodoro from 'components/Molecules/HistoryPomodoro/HistoryPomodoro';
+import debounce from 'lodash.debounce';
 
-const Kreska = styled.div`
-  width: 60px;
-  height: 7px;
-  background: ${({ theme }) => theme.BGblue};
-  border-radius: 100px;
+const StyledWrapperLine = styled.div`
   position: fixed;
-  /* bottom: 5vh; */
-  top: ${({ pos }) => pos}px;
-  /* top: 0; */
+  top: 0;
+  height: 7vh;
   left: 50%;
-  transform: translate(-50%);
+  transform: ${({ currentPostion }) => `translate(-50%, calc(${currentPostion}px - 3.5vh))`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1000;
+  transition: ${({ animateSliding }) => animateSliding && 'transform .3s'};
 `;
 
-// const swipeOptions = {
-//   startSlide: 2,
-// };
+const StyledText = styled.p`
+  color: ${({ theme }) => theme.BGblue};
+  font-size: 1.6rem;
+  margin: 5px 0 0 0;
+
+  ${({ active }) =>
+    active &&
+    css`
+      color: white;
+    `}
+  transition: color .4s;
+`;
+
+const StyledLine = styled.div`
+  width: 40px;
+  height: 4px;
+  background: ${({ theme }) => theme.blue};
+  transition: background 0.4s;
+  border-radius: 100px;
+
+  ${({ active }) =>
+    active &&
+    css`
+      background: white;
+    `}
+`;
 
 const ShowHistoryOfTimeButton = () => {
-  console.log();
-  const [pos, setPos] = useState((window.innerHeight / 20) * 19);
-  // const [avtive, setActive] = useState(false);
+  const minHeightSliding = (window.innerHeight / 20) * 19.3;
+  const maxHeightSliding = (window.innerHeight / 20) * 1;
+  const [currentPositionOfSlide, setCurrentPositionOfSlide] = useState(minHeightSliding);
+  const [active, setActive] = useState(false);
+  const [animateSliding, setAnimateSliding] = useState(false);
+  const [animateActivite, setAnimateActivite] = useState(false);
 
-  // const funcMouseLeave = e => {
-  //   console.log(e.pageY);
-  //   setPos(e.pageY - 115);
-  // };
+  useEffect(() => {
+    if (currentPositionOfSlide < (window.innerHeight / 20) * 19.2) {
+      if (!active) {
+        setAnimateActivite(true);
+        setActive(true);
+        setTimeout(() => {
+          setAnimateActivite(false);
+        }, 250);
+      }
+    } else if (active) {
+      setAnimateActivite(true);
+      setActive(false);
+      setTimeout(() => {
+        setAnimateActivite(false);
+      }, 250);
+    }
+  }, [currentPositionOfSlide]);
 
-  // const funcMouseMove = e => {
-  //   console.log(e);
-  // };
+  const move = debounce(e => {
+    if (!(e > minHeightSliding) && !(e < maxHeightSliding)) {
+      setCurrentPositionOfSlide(e);
+    }
+  }, 1);
 
-  const move = e => {
-    console.log(e);
-    console.log(e.touches[0].clientY);
-    setPos(e.touches[0].clientY);
-    // setActive(true);
+  const whenIsMoving = e => {
+    setAnimateSliding(true);
+    if (e.pageY < minHeightSliding / 2) {
+      setCurrentPositionOfSlide(minHeightSliding);
+    } else {
+      setCurrentPositionOfSlide(maxHeightSliding);
+    }
+    setTimeout(() => {
+      setAnimateSliding(false);
+    }, 300);
   };
 
-  // const mouseUp = e => {
-  //   if (avtive) {
-  //     setActive(false);
-  //     console.log(e.pageY);
-  //   }
-  // };
-
-  // window.addEventListener('mouseup', e => {
-  //   mouseUp(e);
-  // });
-
-  const startMove = e => {
-    console.log(e);
-    console.log('start');
-    // dadać ze po 1 sekundzie trzymania czyli jeśli nie wykryje stopMove to pokazać kawałek tego tam na dole
+  const startedMove = e => {
+    // I have started
   };
 
-  const stopMove = e => {
-    console.log(e);
-    console.log('stop');
+  const stopedMove = e => {
+    // I have stoped
   };
 
   return (
     <>
-      {/* <Kreska onMouseOver={e => funcMouseMove(e)} onMouseLeave={e => funcMouseLeave(e)} pos={pos} /> */}
-      {/* <Kreska onMouseDown={e => mouseDown(e)} pos={pos} /> */}
-      <Kreska
-        onTouchMove={e => move(e)}
-        pos={pos}
-        onTouchStart={e => startMove(e)}
-        onTouchEnd={e => stopMove(e)}
+      <StyledWrapperLine
+        currentPostion={currentPositionOfSlide}
+        onTouchMove={e => move(e.touches[0].clientY)}
+        onTouchStart={e => startedMove(e)}
+        onTouchEnd={e => stopedMove(e)}
+        onClick={e => whenIsMoving(e)}
+        animateSliding={animateSliding}
+        data-testid="openButton"
+      >
+        <StyledLine active={active} />
+        <StyledText active={active}>ostatnie sesje</StyledText>
+      </StyledWrapperLine>
+      <HistoryPomodoro
+        active={active}
+        currentPositionOfSlide={currentPositionOfSlide}
+        animateSliding={animateSliding}
+        animateActivite={animateActivite}
       />
-      {/* <Kreska className="kreska" /> */}
     </>
   );
 };

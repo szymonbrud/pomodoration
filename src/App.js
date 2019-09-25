@@ -13,10 +13,8 @@ const App = () => {
       <BrowserRouter>
         <MainTemplate>
           <Switch>
-            //@TODO: here
-            {/* <PrivateRoute exact path="/timer" component={TimerTemplate} /> */}
-            <Route exact path="/" component={TimerTemplate} />
-            {/* <Route exact path="/" component={LoginTemplate} /> */}
+            <PrivateRoute exact path="/timer" component={TimerTemplate} />
+            <Route exact path="/" component={LoginTemplate} />
           </Switch>
         </MainTemplate>
       </BrowserRouter>

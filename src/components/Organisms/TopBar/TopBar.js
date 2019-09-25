@@ -5,16 +5,15 @@ import { firebaseApp } from 'firebaseConfig';
 import { StyledMainWrapper, StyledH2, StyledName, StyledIcon } from './TopBar.style';
 
 const TopBar = () => {
-  // @TODO: here
-  // const [userName, setUserName] = useState(null);
+  const [userName, setUserName] = useState(null);
 
-  // useEffect(() => {
-  //   const user = firebaseApp.auth().currentUser.displayName;
+  useEffect(() => {
+    const user = firebaseApp.auth().currentUser.displayName;
 
-  //   if (user !== null) {
-  //     setUserName(user);
-  //   }
-  // }, []);
+    if (user !== null) {
+      setUserName(user);
+    }
+  }, []);
 
   return (
     <StyledMainWrapper data-test="TopBarWrapper">
@@ -23,9 +22,7 @@ const TopBar = () => {
       <StyledH2 data-test="Text">
         hello
         <br />
-        //@TODO: here
-        {/* <StyledName>{userName}</StyledName> */}
-        <StyledName>szymon brud</StyledName>
+        <StyledName>{userName}</StyledName>
       </StyledH2>
     </StyledMainWrapper>
   );

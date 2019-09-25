@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import { findByTestAtrr } from 'Utils';
 import TopBar from './TopBar';
 
+// @TODO: możemy to zrobić na bazie tego że pobieranie nazwy dodamy gdzieś indziej, ten test się nie kompiluje bo w nazwie pliku jest błąd
+
 describe('TopBar', () => {
   let wrapper;
   beforeEach(() => {

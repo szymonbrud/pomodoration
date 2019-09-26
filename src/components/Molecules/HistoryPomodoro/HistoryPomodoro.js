@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import propTypes from 'prop-types';
+import PomdoroHistoryContent from 'components/Molecules/PomdoroHistoryContent/PomdoroHistoryContent';
 
 const StyledMainWrapper = styled.div`
   border-radius: 15px 15px 0 0;
@@ -29,7 +30,7 @@ const HistoryPomodoro = ({ active, currentPositionOfSlide, animateSliding, anima
       animateActivite={animateActivite}
       data-testid="content"
     >
-      <></>
+      <PomdoroHistoryContent />
     </StyledMainWrapper>
   );
 };

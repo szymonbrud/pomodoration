@@ -35,7 +35,6 @@ export const SendRunAction = (currentTime, name = '') => {
 };
 
 export const SendPauseAction = (time, name = '') => {
-  console.log(name);
   const userId = firebase.auth().currentUser.uid;
   firebase
     .database()
@@ -55,7 +54,7 @@ export const SendResetAction = () => {
     });
 };
 
-export const saveMyPomodoroToDatabase = (title = 'programowanie') => {
+export const saveMyPomodoroToDatabase = (time, title = 'programowanie') => {
   const userId = firebase.auth().currentUser.uid;
 
   const date = new Date();
@@ -63,52 +62,58 @@ export const saveMyPomodoroToDatabase = (title = 'programowanie') => {
   const currentMonth = addZero(date.getMonth() + 1);
   const currentYear = date.getFullYear();
   const fullDateToDatabase = `${currentDay}|${currentMonth}|${currentYear}`;
-  console.log(fullDateToDatabase);
 
-  const lists = [];
-  const uidList = [];
+  let elementWas;
+  let elementObj;
 
   const query = firebase
     .database()
     .ref(`users/${userId}/hostoryOfPomdoro`)
-    .orderByChild('dateSerch');
+    .orderByChild('dateSerch')
+    .equalTo(fullDateToDatabase);
 
-  const getData = new Promise((resolve, reject) => {
+  const getData = new Promise(resolve => {
     query.once('value').then(snapshot => {
       snapshot.forEach(childSnapshot => {
-        const thisName = childSnapshot.val().date;
-        const thisUid = childSnapshot.key;
-        console.log(thisName);
-        lists.push(thisName);
-        uidList.push(thisUid);
+        if (childSnapshot.val().title === title) {
+          elementWas = childSnapshot.key;
+          elementObj = childSnapshot.val();
+        }
       });
-      resolve(lists);
+      resolve();
     });
   });
 
-  getData.then(lists => {
-    console.log(lists.length);
+  getData.then(() => {
+    if (elementWas) {
+      firebase
+        .database()
+        .ref(`users/${userId}/hostoryOfPomdoro/${elementWas}`)
+        .update({
+          title,
+          dateSerch: fullDateToDatabase,
+          date: new Date().getTime(),
+          time: elementObj.time + time, // będzie trzeba przekazywać czas
+          pomodoro: elementObj.pomodoro + 1,
+        });
+    } else {
+      // co jeżeli go jeszcze NIE było tego dnia w bazie danych
+      const newPomodoroKay = firebase
+        .database()
+        .ref()
+        .child(`users/${userId}/hostoryOfPomdoro`)
+        .push().key;
+
+      firebase
+        .database()
+        .ref(`users/${userId}/hostoryOfPomdoro/${newPomodoroKay}`)
+        .set({
+          title,
+          dateSerch: fullDateToDatabase,
+          date: new Date().getTime(),
+          time, // będzie trzeba przekazywać czas
+          pomodoro: 1,
+        });
+    }
   });
-
-  // const isIn = [];
-
-  // firebase
-  //   .database()
-  //   .ref(`users/${userId}/hostoryOfPomdoro`)
-  //   .orderByChild('dateSerch')
-  //   // .equalTo(fullDateToDatabase)
-
-  //   .on('child_added', async snap => {
-  //     await console.log(snap);
-
-  //     // console.log(snap.key);
-  //     // if(snap.val().name === title){
-  //     //   isIn = true;
-  //     // }
-  //     // if(isIn){
-  //     //   console.log('dobra start')
-  //     // } else if(isIn === false){
-  //   });
-
-  // przeanalizować które mają taką samą nazwę jak moj aktualny ten za pomoną filtera
 };

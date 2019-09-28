@@ -20,6 +20,7 @@ const StyledMainWrapper = styled.div`
   flex-direction: column;
   transform: ${({ open }) => (open ? 'translateY(0%)' : 'translateY(100%)')};
   transition: transform 0.2s;
+  z-index: 5000;
 `;
 
 const StyledClickPaddingForBeam = styled.button`
@@ -85,6 +86,7 @@ const SetNewNameBottomPanel = ({ action, open }) => {
           initialValues={{ name: '' }}
           onSubmit={(values, { setSubmitting }) => {
             sedToRedux(values.name);
+            action();
             setSubmitting(false);
           }}
         >

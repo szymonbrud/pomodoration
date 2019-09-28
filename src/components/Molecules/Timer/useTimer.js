@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { addZero } from 'functions';
 import { useSelector, useDispatch } from 'react-redux';
-import { pomodoroName } from 'actions';
 import InterfaceSwitchButtonsRender from 'components/Molecules/Timer/InterfaceSwitchButtonsRender';
-import { SendRunAction, SendPauseAction, SendResetAction } from './Requests';
+import { downloadData } from 'actions/downloadSessionsFromDatabase';
+import {
+  SendRunAction,
+  SendPauseAction,
+  SendResetAction,
+  saveMyPomodoroToDatabase,
+} from './Requests';
 
 const useTimer = (startTime, status) => {
   const [currentTime, setcurrentTime] = useState();
   const [actionTimer, setActionsTimer] = useState();
   const [off, setOff] = useState(false);
   const nameOfPomodoroState = useSelector(state => state.pomdoroName);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (startTime !== undefined && status !== undefined) {
@@ -64,7 +70,9 @@ const useTimer = (startTime, status) => {
 
   const resetApp = () => {
     setActionsTimer('reset');
+    dispatch(downloadData(false));
     SendResetAction();
+    saveMyPomodoroToDatabase(1500 - currentTime, nameOfPomodoroState.name);
   };
 
   const buttons = (

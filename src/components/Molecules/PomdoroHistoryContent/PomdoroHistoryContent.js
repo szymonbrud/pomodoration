@@ -1,61 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
-import firebase from 'firebase';
-import { saveMyPomodoroToDatabase } from 'components/Molecules/Timer/Requests';
+import { useSelector } from 'react-redux';
+import { getDatabaseFormatDate } from 'functions';
 
 const PomdoroHistoryContent = () => {
-  const date = new Date().getTime();
-  const userId = firebase.auth().currentUser.uid;
-  const database = firebase.database();
+  const downloadData = useSelector(state => state.downloadData);
+  const data = useSelector(state => state.pomodoroSessions);
+  const allDate = useSelector(state => state.allDate);
 
-  // tak będziemy pobierać klucz dla naszych pomodorów
-  // const newPomodoroKay = database
-  //   .ref()
-  //   .child(`users/${userId}/hostoryOfPomdoro`)
-  //   .push().key;
-  // console.log(newPomodoroKay);
+  if (downloadData) {
+    return (
+      <>
+        {allDate.map(eAllDate => (
+          <>
+            <h1>{eAllDate}</h1>
+            {data.map(eData => {
+              if (eAllDate === eData.dateSerch) {
+                return <p>{eData.title}</p>;
+              }
+            })}
+          </>
+        ))}
+      </>
+    );
 
-  // dodaawnie do bazy danych
-  // firebase
-  //   .database()
-  //   .ref(`users/${userId}/hostoryOfPomdoro/${newPomodoroKay}`)
-  //   .set({
-  //     date: 64,
-  //     name: 'kot',
-  //     time: '25min',
-  //   });
-
-  // tak się sortuje według wprowadzonej wartości
-  // const myPomodoros = database
-  //   .ref(`users/${userId}/hostoryOfPomdoro`)
-  //   .orderByChild('name')
-  //   .equalTo('to ja najstarszy 2');
-  // myPomodoros.once('value', snap => {
-  //   if (snap.val()) {
-  //     console.log(snap.val());
-  //   }
-  // });
-
-  // tak się sortuje aby były po koleji
-
-  // const myPomodoros = database.ref(`users/${userId}/hostoryOfPomdoro`);
-  // myPomodoros
-  //   .orderByChild(`date`)
-  //   // .equalTo(9  11)
-
-  //   .on('child_added', snap => {
-  //     console.log(snap.val());
-  //   });
-
-  // console.log(date);
-  // console.log(new Date(date));
-  saveMyPomodoroToDatabase();
-
-  return (
-    <>
-      <p>content</p>
-    </>
-  );
+    // return (
+    //   <>
+    //     {/* {data.map(e => (
+    //       <h1>
+    //         {e.dateSerch === getDatabaseFormatDate()
+    //           ? 'dzis'
+    //           : e.dateSerch === getDatabaseFormatDate(1)
+    //           ? 'wczoraj'
+    //           : e.dateSerch}
+    //       </h1>
+    //     ))} */}
+    //   </>
+    // );
+  }
+  return null;
 };
 
 export default PomdoroHistoryContent;

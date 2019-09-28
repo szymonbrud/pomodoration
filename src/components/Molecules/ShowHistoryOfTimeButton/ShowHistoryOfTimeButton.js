@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import HistoryPomodoro from 'components/Molecules/HistoryPomodoro/HistoryPomodoro';
 import debounce from 'lodash.debounce';
+import { useDispatch, useSelector } from 'react-redux';
+import { downloadSessions } from 'actions/downloadSessionsFromDatabase';
 
 const StyledWrapperLine = styled.div`
   position: fixed;
@@ -51,10 +53,19 @@ const ShowHistoryOfTimeButton = () => {
   const [active, setActive] = useState(false);
   const [animateSliding, setAnimateSliding] = useState(false);
   const [animateActivite, setAnimateActivite] = useState(false);
+  const downloadDataState = useSelector(state => state.downloadData);
+  const dispatch = useDispatch();
+
+  const downloadData = () => {
+    if (!downloadDataState) {
+      dispatch(downloadSessions());
+    }
+  };
 
   useEffect(() => {
     if (currentPositionOfSlide < (window.innerHeight / 20) * 19.2) {
       if (!active) {
+        downloadData();
         setAnimateActivite(true);
         setActive(true);
         setTimeout(() => {

@@ -5,7 +5,7 @@ import { pomdoroName, pomodoroSessions, downloadData, allDate } from 'reducers';
 
 const allStoreEnchancers = compose(
   applyMiddleware(thunk),
-  composeWithDevTools(),
+  // composeWithDevTools(),
 );
 
 const allReducers = combineReducers({

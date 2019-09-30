@@ -39,7 +39,6 @@ const LoginTemplate = ({ user, signOut, signInWithGoogle }) => {
   }
 
   const LoginAction = () => {
-    // signInWithGoogle();
     const provider = new firebase.auth.GoogleAuthProvider();
     firebaseApp.auth().signInWithRedirect(provider);
     setCurrentLogin(true);

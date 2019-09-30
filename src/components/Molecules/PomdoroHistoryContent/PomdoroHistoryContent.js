@@ -8,12 +8,22 @@ const PomdoroHistoryContent = () => {
   const data = useSelector(state => state.pomodoroSessions);
   const allDate = useSelector(state => state.allDate);
 
+  const changeDataToStringWithDayName = date => {
+    if (date === getDatabaseFormatDate()) {
+      return 'dzisiaj';
+    }
+    if (date === getDatabaseFormatDate(1)) {
+      return 'wczoraj';
+    }
+    return date;
+  };
+
   if (downloadData) {
     return (
       <>
         {allDate.map(eAllDate => (
           <>
-            <h1>{eAllDate}</h1>
+            <h1>{changeDataToStringWithDayName(eAllDate)}</h1>
             {data.map(eData => {
               if (eAllDate === eData.dateSerch) {
                 return <p>{eData.title}</p>;

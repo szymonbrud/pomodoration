@@ -39,7 +39,9 @@ export const getDatabaseFormatDate = (minusDay = 0, time) => {
   return fullDateToDatabase;
 };
 
-export const chengeDateToDateWithKoma = date => {};
+export const chengeDateToDateWithKoma = date => {
+  return `${date[0]}${date[1]}.${date[3]}${date[4]}`;
+};
 
 // to są funckcje które ze sobą wspógrają
 const changeDateToNumber = date => {
@@ -75,4 +77,22 @@ export const sortData = date => {
   });
 
   return sortedDate;
+};
+
+export const changeSecoundsToMinAndSec = secounds => {
+  let sec = secounds % 60;
+  sec = addZero(sec);
+  const minutes = Math.floor(secounds / 60);
+  const hours = Math.floor(minutes / 60);
+  let h = hours % 60;
+  let min = minutes % 60;
+  if (hours > 0) {
+    h = addZero(h);
+    return `${hours}h ${min}min`;
+  }
+  if (min === 0) {
+    return `${sec}s`;
+  }
+  min = addZero(min);
+  return `${min}min`;
 };

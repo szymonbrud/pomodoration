@@ -14,6 +14,7 @@ const StyledMainWrapper = styled.div`
   transform: translateY(100%);
   transition: ${({ animateSliding }) => animateSliding && 'transform .3s'};
   transition: ${({ animateActivite }) => animateActivite && 'transform .2s'};
+  overflow: auto;
   ${props =>
     props.active &&
     css`

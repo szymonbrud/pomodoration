@@ -1,7 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { getDatabaseFormatDate } from 'functions';
+import {
+  getDatabaseFormatDate,
+  chengeDateToDateWithKoma,
+  changeSecoundsToMinAndSec,
+} from 'functions';
+import {
+  StyledPositionWrapperOfNamesSestions,
+  StyledNameOfSections,
+  StyledNameOfDay,
+  StyledParagraphNameOfDay,
+  StyledMainWrapperOfSession,
+  StyledNameOFSession,
+  StyledLine,
+  StyledSessionNumber,
+  StyledTimeOfSession,
+  StyledInsideWrapperOfSession,
+  StyledInsideWrapperOfsessionSecound,
+} from './PomdoroHistoryContent.style';
 
 const PomdoroHistoryContent = () => {
   const downloadData = useSelector(state => state.downloadData);
@@ -10,43 +26,53 @@ const PomdoroHistoryContent = () => {
 
   const changeDataToStringWithDayName = date => {
     if (date === getDatabaseFormatDate()) {
-      return 'dzisiaj';
+      return 'dziś';
     }
     if (date === getDatabaseFormatDate(1)) {
       return 'wczoraj';
     }
-    return date;
+    return chengeDateToDateWithKoma(date);
   };
 
   if (downloadData) {
     return (
       <>
-        {allDate.map(eAllDate => (
+        <StyledPositionWrapperOfNamesSestions>
+          <StyledNameOfSections>nazwa</StyledNameOfSections>
+          <StyledNameOfSections>czas</StyledNameOfSections>
+        </StyledPositionWrapperOfNamesSestions>
+        {allDate.map((eAllDate, index) => (
           <>
-            <h1>{changeDataToStringWithDayName(eAllDate)}</h1>
-            {data.map(eData => {
+            <StyledNameOfDay first={index === 0 && true}>
+              <StyledParagraphNameOfDay>
+                {changeDataToStringWithDayName(eAllDate)}
+              </StyledParagraphNameOfDay>
+            </StyledNameOfDay>
+            {data.map((eData, i) => {
               if (eAllDate === eData.dateSerch) {
-                return <p>{eData.title}</p>;
+                return (
+                  <>
+                    <StyledMainWrapperOfSession>
+                      <StyledInsideWrapperOfSession>
+                        <StyledNameOFSession>{eData.title}</StyledNameOFSession>
+                        <StyledLine />
+                      </StyledInsideWrapperOfSession>
+                      <StyledSessionNumber>{eData.pomodoro}</StyledSessionNumber>
+                      <StyledInsideWrapperOfsessionSecound>
+                        <StyledLine />
+                        <StyledTimeOfSession>
+                          {changeSecoundsToMinAndSec(eData.time)}
+                        </StyledTimeOfSession>
+                      </StyledInsideWrapperOfsessionSecound>
+                    </StyledMainWrapperOfSession>
+                  </>
+                );
               }
             })}
           </>
         ))}
       </>
     );
-
-    // return (
-    //   <>
-    //     {/* {data.map(e => (
-    //       <h1>
-    //         {e.dateSerch === getDatabaseFormatDate()
-    //           ? 'dzis'
-    //           : e.dateSerch === getDatabaseFormatDate(1)
-    //           ? 'wczoraj'
-    //           : e.dateSerch}
-    //       </h1>
-    //     ))} */}
-    //   </>
-    // );
   }
   return null;
 };

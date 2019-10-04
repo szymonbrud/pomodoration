@@ -1,4 +1,4 @@
-import { POMODORO_NAME } from 'actions';
+import { POMODORO_NAME, LOADING_DATA_STATUS } from 'actions';
 import {
   DOWNLOAD_DATA_SUCCESSFULL,
   DOWNLOAD_DATA,
@@ -42,6 +42,15 @@ export const allDate = (state = [], { type, payload }) => {
   switch (type) {
     case GET_DATE_FROM_DATA_AND_SORT:
       return payload.date;
+    default:
+      return state;
+  }
+};
+
+export const loadingDataStatusOfTimer = (state = false, { type, payload }) => {
+  switch (type) {
+    case LOADING_DATA_STATUS:
+      return payload.state;
     default:
       return state;
   }

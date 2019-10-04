@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PomodoroSesions from 'components/Molecules/PomodoroSesions/PomodoroSesions';
 import PomodoroSettings from 'components/Molecules/PomodoroSettings/PomodoroSettings';
@@ -22,9 +22,7 @@ const MainContent = () => (
       <PomodoroSesions />
       <PomodoroSettings />
       <TimerWrapper>
-        {({ ItsTime, status, name }) => (
-          <Timer data-testid="timer" ItsTime={ItsTime} status={status} name={name} />
-        )}
+        {({ ItsTime, status }) => <Timer data-testid="timer" ItsTime={ItsTime} status={status} />}
       </TimerWrapper>
       <ShowHistoryOfTimeButton />
     </StyledMainWrapper>

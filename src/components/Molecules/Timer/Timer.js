@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import useTimer from './useTimer';
 
 const StyledTimerWarpper = styled.div`
@@ -27,9 +28,10 @@ const WrapperButtons = styled.div`
 
 const Timer = ({ ItsTime, status }) => {
   const { minutes, secounds, buttons } = useTimer(ItsTime, status);
+  const loading = useSelector(state => state.loadingDataStatusOfTimer);
   return (
     <StyledTimerWarpper>
-      {status === undefined ? (
+      {status === undefined || loading ? (
         <h1>ładowanie...</h1>
       ) : (
         <>

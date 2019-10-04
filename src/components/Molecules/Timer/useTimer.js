@@ -3,6 +3,7 @@ import { addZero } from 'functions';
 import { useSelector, useDispatch } from 'react-redux';
 import InterfaceSwitchButtonsRender from 'components/Molecules/Timer/InterfaceSwitchButtonsRender';
 import { downloadData } from 'actions/downloadSessionsFromDatabase';
+import { loadingDataStatus } from 'actions';
 import {
   SendRunAction,
   SendPauseAction,
@@ -13,27 +14,25 @@ import {
 const useTimer = (startTime, status) => {
   const [currentTime, setcurrentTime] = useState();
   const [actionTimer, setActionsTimer] = useState();
-  const [off, setOff] = useState(false);
-  const nameOfPomodoroState = useSelector(state => state.pomdoroName);
   const dispatch = useDispatch();
+  const nameOfPomodoroState = useSelector(state => state.pomdoroName);
+
+  if (status === 'reset' || status === 'pause') {
+    dispatch(loadingDataStatus(false));
+  }
 
   useEffect(() => {
-    if (startTime !== undefined && status !== undefined) {
-      if (status === 'run' && startTime > 0 && !off) {
+    if (status === 'reset') {
+      setActionsTimer('reset');
+    } else if (startTime !== undefined && status !== undefined) {
+      if (status === 'run') {
         setActionsTimer(status);
         setcurrentTime(startTime);
-        setOff(true);
       }
-
-      if ((status === 'pause' && !off) || (startTime === 0 && !off)) {
+      if (status === 'pause') {
         setActionsTimer('pause');
         setcurrentTime(startTime);
-        setOff(true);
       }
-    }
-    if (status === 'reset' && !off) {
-      setActionsTimer('reset');
-      setOff(true);
     }
   }, [startTime, status]);
 
@@ -42,6 +41,7 @@ const useTimer = (startTime, status) => {
     if (actionTimer === 'run') {
       myInterval = setInterval(() => {
         setcurrentTime(prev => prev - 1);
+        dispatch(loadingDataStatus(false));
       }, 1000);
     } else if (actionTimer === 'reset') {
       setcurrentTime(1500);

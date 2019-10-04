@@ -1,7 +1,13 @@
 import thunk from 'redux-thunk';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { pomdoroName, pomodoroSessions, downloadData, allDate } from 'reducers';
+import {
+  pomdoroName,
+  pomodoroSessions,
+  downloadData,
+  allDate,
+  loadingDataStatusOfTimer,
+} from 'reducers';
 
 const allStoreEnchancers = compose(
   applyMiddleware(thunk),
@@ -13,6 +19,7 @@ const allReducers = combineReducers({
   pomodoroSessions,
   downloadData,
   allDate,
+  loadingDataStatusOfTimer,
 });
 
 const store = createStore(allReducers, allStoreEnchancers);

@@ -1,3 +1,5 @@
+// TODO: napisać testy do tego komponentu, myślę że się da, gdy będę manipulować mock fierbase
+
 import React, { useContext, useState } from 'react';
 import firebase from 'firebase';
 import 'firebase/auth';
@@ -29,7 +31,7 @@ const H1 = styled.h1`
   font-size: 35px;
 `;
 
-// eslint-disable-next-line
+// TODO: napiać prop types do tego, moge wyszukać w necie jakie prop types do tego pasują
 const LoginTemplate = ({ user, signOut, signInWithGoogle }) => {
   const [currentLogin, setCurrentLogin] = useState(false);
   const { currentUser } = useContext(AuthContext);
@@ -51,8 +53,10 @@ const LoginTemplate = ({ user, signOut, signInWithGoogle }) => {
   return (
     <StyledMainWrapper>
       <H2 id="h2">Hello</H2>
+      {/* TODO: co to za linia i poco ją tu wrzuciełem */}
       {/* onClick={() => ServiceWorkerGlobalScope.onnotificationclick} */}
       <H1>Pomodoro app</H1>
+      {/* TODO: dodać w przyszłości że jeżeli user jest aktywny to odrazu go prze redirectować bęzie lepiej */}
       {user ? (
         <>
           <LoginButton textInButton="przejdz do aplikacji" action={rediretMe} LogoActive={false} />

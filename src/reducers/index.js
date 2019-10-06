@@ -55,3 +55,5 @@ export const loadingDataStatusOfTimer = (state = false, { type, payload }) => {
       return state;
   }
 };
+
+// TODO: porozdzielać je plikami i do każego napisac testy, może jakieś helpery do tych testów ale nie wiem

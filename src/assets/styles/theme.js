@@ -5,3 +5,5 @@ export const theme = {
   perpule: '#7066FA',
   white: '#fff',
 };
+
+// TODO: zastanowić się czy chcę dodać tu więcej rzeczy, oraz czy nie zrobić tego jako default export

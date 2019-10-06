@@ -48,7 +48,7 @@ const PomdoroHistoryContent = () => {
                 {changeDataToStringWithDayName(eAllDate)}
               </StyledParagraphNameOfDay>
             </StyledNameOfDay>
-            {data.map((eData, i) => {
+            {data.map(eData => {
               if (eAllDate === eData.dateSerch) {
                 return (
                   <>

@@ -96,3 +96,5 @@ export const changeSecoundsToMinAndSec = secounds => {
   min = addZero(min);
   return `${min}min`;
 };
+
+// TODO: Powydzielać tym funkcją małe zadania, dobrze ponazywać te funkcje oraz zrobić tab aby dobrze ze sobą współpracowały. (Może dodać moduły czy coś takiego )

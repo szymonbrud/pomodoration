@@ -10,7 +10,7 @@ describe('Reducers', () => {
 
   it('Should handle name', () => {
     expect(
-      pomdoroName([], {
+      pomdoroName(undefined, {
         type: POMODORO_NAME,
         payload: {
           name: 'programming',

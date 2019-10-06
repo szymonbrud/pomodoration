@@ -83,6 +83,7 @@ const StyledInput = styled(Field)`
   }
 `;
 
+// TODO: dodać prop types dla center
 const NewInput = ({
   active,
   placeholder,

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { AuthContext } from 'Auth';
 
+// TODO: nauczyć się testować redirect po pewnie jest cos takiego
 const PrivateRoute = ({ component: RouteComponent }) => {
   const { currentUser } = useContext(AuthContext);
 

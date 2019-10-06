@@ -9,6 +9,7 @@ const StyledH1 = styled.h1`
   transform: translate(-50%, -50%);
 `;
 
+// TODO: propTYpes
 const NameOfPomodoro = ({ name }) => {
   const nameState = useSelector(state => state.pomdoroName);
 

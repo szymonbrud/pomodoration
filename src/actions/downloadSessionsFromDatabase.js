@@ -81,3 +81,5 @@ export const downloadSessions = () => {
       });
   };
 };
+
+// TODO: porozdzielać plikami oraz przetestować

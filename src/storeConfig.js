@@ -8,10 +8,11 @@ import {
   allDate,
   loadingDataStatusOfTimer,
 } from 'reducers';
+import pomodoroNames from 'reducers/pomodoroNames';
 
 const allStoreEnchancers = compose(
   applyMiddleware(thunk),
-  // composeWithDevTools(),
+  composeWithDevTools(),
 );
 
 const allReducers = combineReducers({
@@ -20,6 +21,7 @@ const allReducers = combineReducers({
   downloadData,
   allDate,
   loadingDataStatusOfTimer,
+  pomodoroNames,
 });
 
 const store = createStore(allReducers, allStoreEnchancers);

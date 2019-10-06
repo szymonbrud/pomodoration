@@ -18,3 +18,5 @@ export const loadingDataStatus = state => {
     },
   };
 };
+
+// TODO: porozdzielać plikami oraz przetestować

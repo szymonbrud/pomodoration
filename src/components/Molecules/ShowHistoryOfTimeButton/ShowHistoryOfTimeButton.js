@@ -132,3 +132,5 @@ const ShowHistoryOfTimeButton = () => {
 };
 
 export default ShowHistoryOfTimeButton;
+
+// TODO: powywalać z tąd rzeczy których nie potrzebuję

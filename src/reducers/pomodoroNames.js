@@ -1,12 +1,11 @@
-import { CURRENT_NAME } from 'actions/pomodoroNames';
+import { CURRENT_NAME, DOWNLOAD_DATA_POMODORO_NAMES, SET_NAME } from 'actions/pomodoroNames';
 
 const initialState = {
   currentPomodoroName: '',
-  downloadData: false,
+  downloadDataLastPomodoros: false,
   nameOfLastPomodoros: [],
 };
 
-// @TODO: w zmieenić w useTimer na ten reducer aby z tąd pobierał dane a nie z kąś indziej
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case CURRENT_NAME:
@@ -15,10 +14,16 @@ export default (state = initialState, { type, payload }) => {
         currentPomodoroName: payload.name,
         nameOfLastPomodoros: payload.pomodoroNames,
       };
-    case 'DOWNLOAD_DATA': // @TODO: tutaj będziemy równieź przy okazji pobierać aktualną nazwę z bazy danych, wsęsie aktualną nazwę naszego currnetUser bo poco do tego osobna akcja
+    // TODO: mogę gdzieś opisać dlaczego się zdecydowałem na pobieranie osobną  akcją iminia, bo chciałem  ograniczyć pobieranie z bazy danych, nazwa tego jest pobierana przy okazji pobierania innych danych więc to pobrałem
+    case SET_NAME:
       return {
         ...state,
-        downloadData: true,
+        currentPomodoroName: payload.name,
+      };
+    case DOWNLOAD_DATA_POMODORO_NAMES:
+      return {
+        ...state,
+        downloadDataLastPomodoros: true,
         nameOfLastPomodoros: payload.pomodoroNames,
       };
     default:

@@ -11,9 +11,9 @@ const StyledH1 = styled.h1`
 
 // TODO: propTYpes
 const NameOfPomodoro = ({ name }) => {
-  const nameState = useSelector(state => state.pomdoroName);
+  const nameState = useSelector(state => state.pomodoroNames.currentPomodoroName);
 
-  return <StyledH1>{name || nameState.name}</StyledH1>;
+  return <StyledH1>{name || nameState}</StyledH1>;
 };
 
 export default NameOfPomodoro;

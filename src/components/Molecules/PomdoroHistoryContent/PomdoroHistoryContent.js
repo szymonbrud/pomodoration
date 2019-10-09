@@ -20,9 +20,9 @@ import {
 } from './PomdoroHistoryContent.style';
 
 const PomdoroHistoryContent = () => {
-  const downloadData = useSelector(state => state.downloadData);
-  const data = useSelector(state => state.pomodoroSessions);
-  const allDate = useSelector(state => state.allDate);
+  const downloadData = useSelector(state => state.historyOfPomodoro.downloadData);
+  const data = useSelector(state => state.historyOfPomodoro.pomodoroSessions);
+  const allDate = useSelector(state => state.historyOfPomodoro.allDate);
 
   const changeDataToStringWithDayName = date => {
     if (date === getDatabaseFormatDate()) {

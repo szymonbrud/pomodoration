@@ -1,13 +1,13 @@
 import firebase from 'firebase';
 import { sortData } from 'functions';
 
-export const DOWNLOAD_DATA_SUCCESSFULL = 'DOWNLOAD_DATA_SUCCESSFULL';
+export const DOWNLOAD_POMODORO_SESSIONS = 'DOWNLOAD_POMODORO_SESSIONS';
 export const DOWNLOAD_DATA = 'DOWNLOAD_DATA';
 export const GET_DATE_FROM_DATA_AND_SORT = 'GET_DATE_FROM_DATA_AND_SORT';
 
-export const downloadDataSuccessfull = data => {
+export const downloadPomodoroSessions = data => {
   return {
-    type: DOWNLOAD_DATA_SUCCESSFULL,
+    type: DOWNLOAD_POMODORO_SESSIONS,
     payload: {
       data,
     },
@@ -24,7 +24,6 @@ export const downloadData = download => {
 };
 
 export const getDateFromDataAndSort = data => {
-  // TODO:  chenge the name of variable
   let allDate = [];
 
   let declarated = false;
@@ -71,7 +70,7 @@ export const downloadSessions = () => {
 
     getData
       .then(() => {
-        return dispatch(downloadDataSuccessfull(pomodoroSessions));
+        return dispatch(downloadPomodoroSessions(pomodoroSessions));
       })
       .then(() => {
         return dispatch(getDateFromDataAndSort(pomodoroSessions));
@@ -81,5 +80,3 @@ export const downloadSessions = () => {
       });
   };
 };
-
-// TODO: porozdzielać plikami oraz przetestować

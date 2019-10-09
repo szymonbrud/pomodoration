@@ -15,7 +15,7 @@ const useTimer = (startTime, status) => {
   const [currentTime, setcurrentTime] = useState();
   const [actionTimer, setActionsTimer] = useState();
   const dispatch = useDispatch();
-  const nameOfPomodoroState = useSelector(state => state.pomdoroName);
+  const nameOfPomodoroState = useSelector(state => state.pomodoroNames.currentPomodoroName);
 
   if (status === 'reset' || status === 'pause') {
     dispatch(loadingDataStatus(false));
@@ -60,19 +60,19 @@ const useTimer = (startTime, status) => {
 
   const runApp = () => {
     setActionsTimer('run');
-    SendRunAction(currentTime, nameOfPomodoroState.name);
+    SendRunAction(currentTime, nameOfPomodoroState);
   };
 
   const pauseApp = () => {
     setActionsTimer('pause');
-    SendPauseAction(currentTime, nameOfPomodoroState.name);
+    SendPauseAction(currentTime, nameOfPomodoroState);
   };
 
   const resetApp = () => {
     setActionsTimer('reset');
     dispatch(downloadData(false));
     SendResetAction();
-    saveMyPomodoroToDatabase(1500 - currentTime, nameOfPomodoroState.name);
+    saveMyPomodoroToDatabase(1500 - currentTime, nameOfPomodoroState);
   };
 
   const buttons = (
@@ -81,7 +81,7 @@ const useTimer = (startTime, status) => {
       runApp={runApp}
       resetApp={resetApp}
       currentAction={actionTimer}
-      name={nameOfPomodoroState.name}
+      name={nameOfPomodoroState}
     />
   );
 

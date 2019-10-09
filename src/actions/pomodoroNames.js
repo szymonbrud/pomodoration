@@ -1,5 +1,6 @@
 export const CURRENT_NAME = 'CURRENT_NAME';
-export const DOWNLOAD_DATA = 'DOWNLOAD_DATA';
+export const DOWNLOAD_DATA_POMODORO_NAMES = 'DOWNLOAD_DATA_POMODORO_NAMES';
+export const SET_NAME = 'SET_NAME';
 
 export const changeCurrentNamePomodoro = (currentName, nameOfLastPomodoros) => {
   if (currentName === '') {
@@ -21,7 +22,16 @@ export const changeCurrentNamePomodoro = (currentName, nameOfLastPomodoros) => {
     type: CURRENT_NAME,
     payload: {
       name: currentName,
-      pomodoroNames: allLastPomodoros,
+      pomodoroNames: allLastPomodoros === null ? [] : allLastPomodoros,
+    },
+  };
+};
+
+export const onlySetCurrentName = currentName => {
+  return {
+    type: SET_NAME,
+    payload: {
+      name: !currentName ? '' : currentName,
     },
   };
 };

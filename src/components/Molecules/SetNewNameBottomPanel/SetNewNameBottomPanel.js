@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import NewInput from 'components/Molecules/Input/Input';
 import { Formik } from 'formik';
-import { pomodoroName } from 'actions';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
@@ -75,7 +74,6 @@ const SetNewNameBottomPanel = ({ action, open }) => {
   const nameOfLastPomodoros = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);
 
   const sedToRedux = name => {
-    dispatch(pomodoroName(name));
     dispatch(changeCurrentNamePomodoro(name, nameOfLastPomodoros));
   };
 

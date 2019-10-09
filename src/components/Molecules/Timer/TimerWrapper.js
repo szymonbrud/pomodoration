@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import firebase from 'firebase';
-import { useDispatch } from 'react-redux';
-import { pomodoroName, loadingDataStatus } from 'actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadingDataStatus } from 'actions';
+import { onlySetCurrentName } from 'actions/pomodoroNames';
 
 const TimerWrapper = ({ children }) => {
   const database = firebase.database();
@@ -10,6 +11,7 @@ const TimerWrapper = ({ children }) => {
   const [status, setStatus] = useState();
   const [getNewState, setGetNewState] = useState(false);
   const dispatch = useDispatch();
+  const pomodorosAllLast = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);
   // to daje nam to że jeżeli wyłączymy i włączymy aplikacje to mamy pewność przeładowania
 
   let loading = false;
@@ -35,7 +37,7 @@ const TimerWrapper = ({ children }) => {
       if (snap.val()) {
         setTimeBase(snap.val().time);
         setStatus(snap.val().status);
-        dispatch(pomodoroName(snap.val().name));
+        dispatch(onlySetCurrentName(snap.val().name));
       }
     });
   }, []);

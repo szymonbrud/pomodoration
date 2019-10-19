@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+// import firebase from 'firebase';
 import { sortData } from 'functions';
 
 export const DOWNLOAD_POMODORO_SESSIONS = 'DOWNLOAD_POMODORO_SESSIONS';
@@ -49,34 +49,34 @@ export const getDateFromDataAndSort = data => {
   };
 };
 
-export const downloadSessions = () => {
-  const userId = firebase.auth().currentUser.uid;
-  const query = firebase
-    .database()
-    .ref(`users/${userId}/hostoryOfPomdoro`)
-    .orderByChild('date');
+// export const downloadSessions = () => {
+//   const userId = firebase.auth().currentUser.uid;
+//   const query = firebase
+//     .database()
+//     .ref(`users/${userId}/hostoryOfPomdoro`)
+//     .orderByChild('date');
 
-  let pomodoroSessions = [];
+//   let pomodoroSessions = [];
 
-  return dispatch => {
-    const getData = new Promise(resolve => {
-      query.once('value').then(snapshot => {
-        snapshot.forEach(childSnapshot => {
-          pomodoroSessions = [...pomodoroSessions, childSnapshot.val()];
-        });
-        resolve();
-      });
-    });
+//   return dispatch => {
+//     const getData = new Promise(resolve => {
+//       query.once('value').then(snapshot => {
+//         snapshot.forEach(childSnapshot => {
+//           pomodoroSessions = [...pomodoroSessions, childSnapshot.val()];
+//         });
+//         resolve();
+//       });
+//     });
 
-    getData
-      .then(() => {
-        return dispatch(downloadPomodoroSessions(pomodoroSessions));
-      })
-      .then(() => {
-        return dispatch(getDateFromDataAndSort(pomodoroSessions));
-      })
-      .then(() => {
-        return dispatch(downloadData(true));
-      });
-  };
-};
+//     getData
+//       .then(() => {
+//         return dispatch(downloadPomodoroSessions(pomodoroSessions));
+//       })
+//       .then(() => {
+//         return dispatch(getDateFromDataAndSort(pomodoroSessions));
+//       })
+//       .then(() => {
+//         return dispatch(downloadData(true));
+//       });
+//   };
+// };

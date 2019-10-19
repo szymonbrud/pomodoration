@@ -34,6 +34,9 @@ const PomdoroHistoryContent = () => {
     return chengeDateToDateWithKoma(date);
   };
 
+  // console.log(allDate);
+  // console.log(data);
+  // TODO: co gdy jeszcze nie będę miał jeszcze żadnych zapisanych pomodoro w histori
   if (downloadData) {
     return (
       <>
@@ -44,28 +47,26 @@ const PomdoroHistoryContent = () => {
         {allDate.map((eAllDate, index) => (
           <>
             <StyledNameOfDay first={index === 0 && true}>
-              <StyledParagraphNameOfDay>
+              <StyledParagraphNameOfDay data-testid="dataOfPomodoro">
                 {changeDataToStringWithDayName(eAllDate)}
               </StyledParagraphNameOfDay>
             </StyledNameOfDay>
             {data.map(eData => {
               if (eAllDate === eData.dateSerch) {
                 return (
-                  <>
-                    <StyledMainWrapperOfSession>
-                      <StyledInsideWrapperOfSession>
-                        <StyledNameOFSession>{eData.title}</StyledNameOFSession>
-                        <StyledLine />
-                      </StyledInsideWrapperOfSession>
-                      <StyledSessionNumber>{eData.pomodoro}</StyledSessionNumber>
-                      <StyledInsideWrapperOfsessionSecound>
-                        <StyledLine />
-                        <StyledTimeOfSession>
-                          {changeSecoundsToMinAndSec(eData.time)}
-                        </StyledTimeOfSession>
-                      </StyledInsideWrapperOfsessionSecound>
-                    </StyledMainWrapperOfSession>
-                  </>
+                  <StyledMainWrapperOfSession>
+                    <StyledInsideWrapperOfSession>
+                      <StyledNameOFSession>{eData.title}</StyledNameOFSession>
+                      <StyledLine />
+                    </StyledInsideWrapperOfSession>
+                    <StyledSessionNumber>{eData.pomodoro}</StyledSessionNumber>
+                    <StyledInsideWrapperOfsessionSecound>
+                      <StyledLine />
+                      <StyledTimeOfSession>
+                        {changeSecoundsToMinAndSec(eData.time)}
+                      </StyledTimeOfSession>
+                    </StyledInsideWrapperOfsessionSecound>
+                  </StyledMainWrapperOfSession>
                 );
               }
             })}
@@ -74,7 +75,9 @@ const PomdoroHistoryContent = () => {
       </>
     );
   }
-  return null;
+
+  // TODO: co z tym zrobić, i dla czego to tu dałem (chyba tu powinna być animacja ładowania danych)
+  return <p data-testid="patagraph">lol</p>;
 };
 
 export default PomdoroHistoryContent;

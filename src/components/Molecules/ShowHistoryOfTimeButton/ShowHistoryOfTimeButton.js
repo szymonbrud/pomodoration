@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import HistoryPomodoro from 'components/Molecules/HistoryPomodoro/HistoryPomodoro';
 import debounce from 'lodash.debounce';
 import { useDispatch, useSelector } from 'react-redux';
-import { downloadSessions } from 'actions/downloadSessionsFromDatabase';
+import downloadSessions from 'actions/downloadData/downloadSessionsFromFirebase';
 
 const StyledWrapperLine = styled.div`
   position: fixed;
@@ -132,5 +132,3 @@ const ShowHistoryOfTimeButton = () => {
 };
 
 export default ShowHistoryOfTimeButton;
-
-// TODO: powywalać z tąd rzeczy których nie potrzebuję

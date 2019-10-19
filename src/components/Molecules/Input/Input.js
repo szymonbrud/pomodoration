@@ -21,7 +21,6 @@ const StyledMainWrapper = styled.div`
   ::before,
   ::after {
     position: absolute;
-    /* opacity: 0; */
   }
 
   ::before {
@@ -46,8 +45,6 @@ const StyledMainWrapper = styled.div`
     z-index: 0;
     font-size: 2rem;
     content: '${({ placeholder }) => placeholder}';
-
-    
 
     ${({ focus }) =>
       focus &&
@@ -83,7 +80,6 @@ const StyledInput = styled(Field)`
   }
 `;
 
-// TODO: dodać prop types dla center
 const NewInput = ({
   active,
   placeholder,
@@ -137,6 +133,7 @@ NewInput.propTypes = {
   width: propTypes.string,
   type: propTypes.string,
   color: propTypes.string,
+  center: propTypes.bool,
 };
 
 NewInput.defaultProps = {
@@ -148,6 +145,7 @@ NewInput.defaultProps = {
   width: '',
   type: '',
   color: '',
+  center: false,
 };
 
 export default NewInput;

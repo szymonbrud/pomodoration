@@ -10,6 +10,7 @@ const StyledH1 = styled.h1`
 `;
 
 // TODO: propTYpes
+// TODO: zmineić style, oraz może położenie tego chodzi mi o plik do którego to impotujemy
 const NameOfPomodoro = ({ name }) => {
   const nameState = useSelector(state => state.pomodoroNames.currentPomodoroName);
 

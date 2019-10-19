@@ -11,10 +11,6 @@ const StyledMainWrapper = styled.div`
   border-radius: 10px;
 `;
 
-const PomodoroSettings = () => (
-  <>
-    <StyledMainWrapper />
-  </>
-);
+const PomodoroSettings = () => <StyledMainWrapper />;
 
 export default PomodoroSettings;

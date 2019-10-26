@@ -22,16 +22,11 @@ export const SendRunAction = (currentTime, name = '') => {
   firebase
     .database()
     .ref(`/users/${userId}/timer`)
-    .set(
-      {
-        time: willTime,
-        status: 'run',
-        name,
-      },
-      error => {
-        error && console.log(error);
-      },
-    );
+    .set({
+      time: willTime,
+      status: 'run',
+      name,
+    });
 };
 
 export const SendPauseAction = (time, name = '') => {
@@ -39,9 +34,7 @@ export const SendPauseAction = (time, name = '') => {
   firebase
     .database()
     .ref(`/users/${userId}/timer`)
-    .set({ time, status: 'pause', name }, err => {
-      err && console.log(err);
-    });
+    .set({ time, status: 'pause', name });
 };
 
 export const SendResetAction = () => {
@@ -93,11 +86,10 @@ export const saveMyPomodoroToDatabase = (time, title = 'programowanie') => {
           title,
           dateSerch: fullDateToDatabase,
           date: new Date().getTime(),
-          time: elementObj.time + time, // będzie trzeba przekazywać czas
+          time: elementObj.time + time,
           pomodoro: elementObj.pomodoro + 1,
         });
     } else {
-      // co jeżeli go jeszcze NIE było tego dnia w bazie danych
       const newPomodoroKay = firebase
         .database()
         .ref()
@@ -111,7 +103,7 @@ export const saveMyPomodoroToDatabase = (time, title = 'programowanie') => {
           title,
           dateSerch: fullDateToDatabase,
           date: new Date().getTime(),
-          time, // będzie trzeba przekazywać czas
+          time,
           pomodoro: 1,
         });
     }

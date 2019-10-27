@@ -1,3 +1,5 @@
+import { saveMyPomodorosNamesToDatabase } from 'components/Molecules/Timer/Requests';
+
 export const CURRENT_NAME = 'CURRENT_NAME';
 export const DOWNLOAD_DATA_POMODORO_NAMES = 'DOWNLOAD_DATA_POMODORO_NAMES';
 export const SET_NAME = 'SET_NAME';
@@ -12,11 +14,23 @@ export const changeCurrentNamePomodoro = (currentName, nameOfLastPomodoros) => {
       },
     };
   }
+
   const allLastPomodoros = nameOfLastPomodoros;
-  if (allLastPomodoros.length === 5) {
+  const serchForCopy = allLastPomodoros.findIndex(name => name === currentName);
+  if (serchForCopy !== -1) {
+    allLastPomodoros.splice(serchForCopy, 1);
+  } else if (allLastPomodoros.length === 5) {
     allLastPomodoros.pop();
   }
+  console.log(serchForCopy);
+  // if()
+
+  // if (allLastPomodoros.length === 5) {
+  //   allLastPomodoros.pop();
+  // }
   allLastPomodoros.unshift(currentName);
+
+  saveMyPomodorosNamesToDatabase(allLastPomodoros);
 
   return {
     type: CURRENT_NAME,

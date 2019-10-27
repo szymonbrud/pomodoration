@@ -7,6 +7,9 @@ const StyledH1 = styled.h1`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: ${({ theme }) => theme.blue};
+  font-size: 2rem;
+  font-weight: 300;
 `;
 
 // TODO: propTYpes

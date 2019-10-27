@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import LoadingAnimation from 'components/Molecules/LoadingAnimation/LoadingAnimation';
 import useTimer from './useTimer';
 
 const StyledTimerWarpper = styled.div`
@@ -32,7 +33,7 @@ const Timer = ({ ItsTime, status }) => {
   return (
     <StyledTimerWarpper>
       {status === undefined || loading ? (
-        <h1>ładowanie...</h1>
+        <LoadingAnimation text="ładowanie" />
       ) : (
         <>
           <StyledTimer>

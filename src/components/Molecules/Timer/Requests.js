@@ -109,3 +109,22 @@ export const saveMyPomodoroToDatabase = (time, title = 'programowanie') => {
     }
   });
 };
+
+export const saveMyPomodorosNamesToDatabase = tab => {
+  // if (currentName !== '') {
+  //   console.log(`last: ${lastTabOfPomodoros}`);
+  //   const allLastPomodoros = lastTabOfPomodoros;
+  //   if (allLastPomodoros.length === 5) {
+  //     allLastPomodoros.pop();
+  //   }
+  //   allLastPomodoros.unshift(currentName);
+
+  //   console.log(allLastPomodoros);
+
+  // }
+  const userId = firebase.auth().currentUser.uid;
+  firebase
+    .database()
+    .ref(`/users/${userId}/pomodoroNames`)
+    .set(tab);
+};

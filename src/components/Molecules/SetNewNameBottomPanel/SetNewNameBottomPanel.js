@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
+import { saveMyPomodorosNamesToDatabase } from 'components/Molecules/Timer/Requests';
 
 const StyledMainWrapper = styled.div`
   height: 35vh;

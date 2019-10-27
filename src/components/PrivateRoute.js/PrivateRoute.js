@@ -2,6 +2,13 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { AuthContext } from 'Auth';
+import LoadingAnimation from 'components/Molecules/LoadingAnimation/LoadingAnimation';
+import styled from 'styled-components';
+
+const WrapperForLoading = styled.div`
+  width: 100%;
+  height: 100vh;
+`;
 
 // TODO: nauczyć się testować redirect po pewnie jest cos takiego
 const PrivateRoute = ({ component: RouteComponent }) => {
@@ -14,7 +21,11 @@ const PrivateRoute = ({ component: RouteComponent }) => {
     return <Redirect to="/" />;
   }
 
-  return <h1>loading......</h1>;
+  return (
+    <WrapperForLoading>
+      <LoadingAnimation text="autoryzacja" />
+    </WrapperForLoading>
+  );
 };
 
 PrivateRoute.propTypes = {

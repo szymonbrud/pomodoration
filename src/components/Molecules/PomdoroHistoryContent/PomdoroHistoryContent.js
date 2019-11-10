@@ -5,6 +5,7 @@ import {
   chengeDateToDateWithKoma,
   changeSecoundsToMinAndSec,
 } from 'functions';
+import LoadingAnimation from 'components/Molecules/LoadingAnimation/LoadingAnimation';
 import {
   StyledPositionWrapperOfNamesSestions,
   StyledNameOfSections,
@@ -33,10 +34,6 @@ const PomdoroHistoryContent = () => {
     }
     return chengeDateToDateWithKoma(date);
   };
-
-  // console.log(allDate);
-  // console.log(data);
-  // TODO: co gdy jeszcze nie będę miał jeszcze żadnych zapisanych pomodoro w histori
   if (downloadData) {
     return (
       <>
@@ -45,16 +42,16 @@ const PomdoroHistoryContent = () => {
           <StyledNameOfSections>czas</StyledNameOfSections>
         </StyledPositionWrapperOfNamesSestions>
         {allDate.map((eAllDate, index) => (
-          <>
-            <StyledNameOfDay first={index === 0 && true}>
+          <div key={`id_${eAllDate}`}>
+            <StyledNameOfDay first={index === 0}>
               <StyledParagraphNameOfDay data-testid="dataOfPomodoro">
                 {changeDataToStringWithDayName(eAllDate)}
               </StyledParagraphNameOfDay>
             </StyledNameOfDay>
-            {data.map(eData => {
-              if (eAllDate === eData.dateSerch) {
-                return (
-                  <StyledMainWrapperOfSession>
+            {data.map(
+              eData =>
+                eAllDate === eData.dateSerch && (
+                  <StyledMainWrapperOfSession key={eData.date.toString()}>
                     <StyledInsideWrapperOfSession>
                       <StyledNameOFSession>{eData.title}</StyledNameOFSession>
                       <StyledLine />
@@ -67,17 +64,14 @@ const PomdoroHistoryContent = () => {
                       </StyledTimeOfSession>
                     </StyledInsideWrapperOfsessionSecound>
                   </StyledMainWrapperOfSession>
-                );
-              }
-            })}
-          </>
+                ),
+            )}
+          </div>
         ))}
       </>
     );
   }
-
-  // TODO: co z tym zrobić, i dla czego to tu dałem (chyba tu powinna być animacja ładowania danych)
-  return <p data-testid="patagraph">lol</p>;
+  return <LoadingAnimation data-testid="patagraph">ładowanie</LoadingAnimation>;
 };
 
 export default PomdoroHistoryContent;

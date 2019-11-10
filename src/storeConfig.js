@@ -1,7 +1,7 @@
 import thunk from 'redux-thunk';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { loadingDataStatusOfTimer } from 'reducers';
+import isloadingDataStatusOfTimer from 'reducers/isloadingDataStatusOfTimer';
 import pomodoroNames from 'reducers/pomodoroNames';
 import historyOfPomodoro from 'reducers/historyOfPomodoro';
 
@@ -11,7 +11,7 @@ const allStoreEnchancers = compose(
 );
 
 const allReducers = combineReducers({
-  loadingDataStatusOfTimer,
+  isloadingDataStatusOfTimer,
   pomodoroNames,
   historyOfPomodoro,
 });

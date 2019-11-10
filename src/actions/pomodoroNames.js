@@ -22,14 +22,7 @@ export const changeCurrentNamePomodoro = (currentName, nameOfLastPomodoros) => {
   } else if (allLastPomodoros.length === 5) {
     allLastPomodoros.pop();
   }
-  console.log(serchForCopy);
-  // if()
-
-  // if (allLastPomodoros.length === 5) {
-  //   allLastPomodoros.pop();
-  // }
   allLastPomodoros.unshift(currentName);
-
   saveMyPomodorosNamesToDatabase(allLastPomodoros);
 
   return {

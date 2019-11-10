@@ -14,6 +14,7 @@ const StyledMainWrapper = styled.div`
 
 const StyledMainRoller = styled.p`
   margin: 0;
+  padding: 0;
   color: ${({ theme }) => theme.perpule};
   font-size: 2.1rem;
   text-align: center;
@@ -93,32 +94,30 @@ const OneElementOfList = styled.p`
 const StyledOneOption = styled.div`
   font-size: 2.4rem;
   margin: 12px 0 2px;
-  border-top: solid 1px #000;
+  border-top: solid 1px rgba(0, 0, 0, 0.45);
   width: 100%;
   display: flex;
   align-items: center;
 `;
 
 const StyledAddNewNameP = styled.p`
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   color: rgba(116, 104, 248, 0.7);
   margin: 0 13px;
-  padding: 10px 0;
+  padding: 13px 3px;
 `;
 
 const SetName = () => {
-  // TODO: review, tests
   const dispatch = useDispatch();
   const pomodoroNames = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);
   const [open, setOpen] = useState(false);
   const [openDownBar, setOpenDownBar] = useState(false);
 
-  // błędna nazwa literówka w chenge
-  const chengeOpen = () => {
+  const changeOpen = () => {
     setOpen(!open);
   };
 
-  const chengeOpenDownBar = () => {
+  const changeOpenDownBar = () => {
     setOpenDownBar(false);
   };
 
@@ -129,26 +128,37 @@ const SetName = () => {
 
   const setOptionFromList = name => {
     dispatch(changeCurrentNamePomodoro(name, pomodoroNames));
-    chengeOpen();
+    changeOpen();
   };
+
+  // TODO: wywalić testy tego pliku i dodać je jako integracyjne
 
   return (
     <>
       <StyledMainWrapper>
-        <StyledMainRoller onClick={() => chengeOpen()}>co dziś robimy?</StyledMainRoller>
-        <StyledMainSelecter open={open} data-testid="wrapperCelecter">
+        <StyledMainRoller onClick={() => changeOpen()}>co dziś robimy?</StyledMainRoller>
+        <StyledMainSelecter open={open} data-testid="listOfPomodoros">
           <StyledSmallInformation>ostatnie:</StyledSmallInformation>
           {pomodoroNames.map(e => (
-            <OneElementOfList onClick={() => setOptionFromList(e)}>{e}</OneElementOfList>
+            <OneElementOfList
+              onClick={() => setOptionFromList(e)}
+              key={`id_${e}`}
+              data-testid="pomodoroNamesElement"
+            >
+              {e}
+            </OneElementOfList>
           ))}
           <StyledOneOption onClick={() => OpenBarAndCloseList()}>
             <StyledAddNewNameP>+dodaj nazwę</StyledAddNewNameP>
           </StyledOneOption>
         </StyledMainSelecter>
-        <StyledCloseWrapper open={open} onClick={() => chengeOpen()} />
-        {/* reszta opcji */}
+        <StyledCloseWrapper open={open} onClick={() => changeOpen()} />
       </StyledMainWrapper>
-      <SetNewNameBottomPanel open={openDownBar} action={chengeOpenDownBar} />
+      <SetNewNameBottomPanel
+        open={openDownBar}
+        action={changeOpenDownBar}
+        data-testid="SetNewNameBottomPanel"
+      />
     </>
   );
 };

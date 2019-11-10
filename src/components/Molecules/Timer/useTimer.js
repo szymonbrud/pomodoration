@@ -3,7 +3,7 @@ import { addZero } from 'functions';
 import { useSelector, useDispatch } from 'react-redux';
 import InterfaceSwitchButtonsRender from 'components/Molecules/Timer/InterfaceSwitchButtonsRender';
 import { downloadData } from 'actions/downloadSessionsFromDatabase';
-import { loadingDataStatus } from 'actions';
+import { changeLoadingDataStatus } from 'actions/changeDataLoadingStatus';
 import {
   SendRunAction,
   SendPauseAction,
@@ -18,7 +18,7 @@ const useTimer = (startTime, status) => {
   const nameOfPomodoroState = useSelector(state => state.pomodoroNames.currentPomodoroName);
 
   if (status === 'reset' || status === 'pause') {
-    dispatch(loadingDataStatus(false));
+    dispatch(changeLoadingDataStatus(false));
   }
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const useTimer = (startTime, status) => {
     if (actionTimer === 'run') {
       myInterval = setInterval(() => {
         setcurrentTime(prev => prev - 1);
-        dispatch(loadingDataStatus(false));
+        dispatch(changeLoadingDataStatus(false));
       }, 1000);
     } else if (actionTimer === 'reset') {
       setcurrentTime(1500);

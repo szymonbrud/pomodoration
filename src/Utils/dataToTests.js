@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 export const historyOfPomodorosDataFromDatabase = [
   {
     date: 1569575447927,

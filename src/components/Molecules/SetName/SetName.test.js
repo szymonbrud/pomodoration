@@ -1,73 +1,91 @@
-// import React from 'react';
-// import { render, fireEvent, cleanup } from '@testing-library/react';
-// import { Provider } from 'react-redux';
-// import thunk from 'redux-thunk';
-// import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
-// import { pomdoroName } from 'reducers';
-// import SetName from './SetName';
+import React from 'react';
+import { storeToTests } from 'Utils';
+import { render, fireEvent } from '@testing-library/react';
+import pomodoroNames from 'reducers/pomodoroNames';
+import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
+import { Provider } from 'react-redux';
+import SetName from './SetName';
 
-// const allStoreEnchancers = compose(applyMiddleware(thunk));
+jest.mock('components/Molecules/Timer/Requests');
 
-// const allReducers = combineReducers({
-//   pomdoroName,
-// });
+describe('SetName click option', () => {
+  it('check the list of pomodoroNames', () => {
+    const store = storeToTests({ pomodoroNames });
+    store.dispatch(changeCurrentNamePomodoro('reading', ['coding', 'slepping']));
+    const { getAllByTestId } = render(
+      <Provider store={store}>
+        <SetName />
+      </Provider>,
+    );
 
-// const store = createStore(allReducers, allStoreEnchancers);
+    const allPomdoros = getAllByTestId('pomodoroNamesElement');
 
-// const InitStateComp = cmp => {
-//   return render(<Provider store={store}>{cmp}</Provider>);
-// };
+    const tabOfPomodoroNames = [];
 
-describe('SetName Component', () => {
-  it('should ', () => {});
-  // afterEach(cleanup);
+    allPomdoros.forEach(e => {
+      tabOfPomodoroNames.push(e.textContent);
+    });
 
-  // it('Open lists on click', () => {
-  //   const { getByText, getByTestId } = InitStateComp(<SetName />);
+    expect(tabOfPomodoroNames).toEqual(['reading', 'coding', 'slepping']);
+  });
 
-  //   const button = getByText('co dziś robimy?');
-  //   fireEvent.click(button);
+  it('check the list of pomodoro when click one of elements', () => {
+    const store = storeToTests({ pomodoroNames });
+    store.dispatch(changeCurrentNamePomodoro('reading', ['coding', 'slepping']));
+    const { getAllByTestId, getByText } = render(
+      <Provider store={store}>
+        <SetName />
+      </Provider>,
+    );
 
-  //   const styleWrapper = window.getComputedStyle(getByTestId('wrapperCelecter'));
-  //   expect(styleWrapper.display).toBe('block');
-  // });
+    const coding = getByText('coding');
+    fireEvent.click(coding);
 
-  // it('Open bottom Bar when add_new_name has been clicked', () => {
-  //   const { getByText, getByTestId } = InitStateComp(<SetName />);
+    const allPomdoros = getAllByTestId('pomodoroNamesElement');
+    const tabOfPomodoroNames = [];
 
-  //   const button = getByText('co dziś robimy?');
-  //   fireEvent.click(button);
+    allPomdoros.forEach(e => {
+      tabOfPomodoroNames.push(e.textContent);
+    });
 
-  //   const openBottomBarButton = getByText('+dodaj nazwę');
-  //   fireEvent.click(openBottomBarButton);
+    expect(tabOfPomodoroNames).toEqual(['coding', 'reading', 'slepping']);
+  });
 
-  //   const bottomBar = getByTestId('bottomBarMainWrapper');
-  //   const styleButtonBarMainWrapper = window.getComputedStyle(bottomBar);
-  //   expect(styleButtonBarMainWrapper.transform).toBe('translateY(0%)');
-  // });
+  // TODO: repair this test
+  // it('add new pomodoroName by SetNewNameBottomPanel component', async () => {
+  //   const store = storeToTests({ pomodoroNames });
+  //   store.dispatch(changeCurrentNamePomodoro('reading', ['coding', 'slepping']));
+  //   const { getByTestId, getByText, findByTestId, getAllByTestId } = render(
+  //     <Provider store={store}>
+  //       <SetName />
+  //     </Provider>,
+  //   );
 
-  // it('Should do NOT open Bottom bar', () => {
-  //   const { getByTestId } = InitStateComp(<SetName />);
+  //   const input = getByTestId('input');
+  //   fireEvent.change(input, { target: { value: 'programming' } });
 
-  //   const bottomBar = getByTestId('bottomBarMainWrapper');
-  //   const styleButtonBarMainWrapper = window.getComputedStyle(bottomBar);
-  //   expect(styleButtonBarMainWrapper.transform).toBe('translateY(100%)');
-  // });
+  //   const doneButton = getByText('done');
+  //   fireEvent.click(doneButton);
 
-  // it('Should close a Bottom bar', () => {
-  //   const { getByText, getByTestId } = InitStateComp(<SetName />);
+  //   const wrrper = getByText('co dziś robimy?');
+  //   fireEvent.click(wrrper);
 
-  //   const button = getByText('co dziś robimy?');
-  //   fireEvent.click(button);
+  //   const tabOfPOmodorNames = [];
 
-  //   const openBottomBarButton = getByText('+dodaj nazwę');
-  //   fireEvent.click(openBottomBarButton);
+  //   const allPomoros = getAllByTestId('pomodoroNamesElement');
+  //   allPomoros.forEach(e => {
+  //     tabOfPOmodorNames.push(e.textContent);
+  //   });
 
-  //   const closeButton = getByText('back');
-  //   fireEvent.click(closeButton);
+  //   let storeSome;
 
-  //   const bottomBar = getByTestId('bottomBarMainWrapper');
-  //   const styleButtonBarMainWrapper = window.getComputedStyle(bottomBar);
-  //   expect(styleButtonBarMainWrapper.transform).toBe('translateY(100%)');
+  //   setTimeout(() => {
+  //     storeSome = store.getState().pomodoroNames.nameOfLastPomodoros;
+  //   });
+
+  //   // const SetNewNameBottomPanel = await waitForElement(() => findByTestId('input'));
+  //   // console.log(input);
+
+  //   expect(storeSome).toBe(['reading', 'coding', 'slepping']);
   // });
 });

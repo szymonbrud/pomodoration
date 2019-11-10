@@ -48,7 +48,11 @@ const LoadingAnimation = ({ text }) => (
 );
 
 LoadingAnimation.propTypes = {
-  text: propTypes.string.isRequired,
+  text: propTypes.string,
+};
+
+LoadingAnimation.defaultProps = {
+  text: '',
 };
 
 export default LoadingAnimation;

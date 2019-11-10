@@ -5,6 +5,8 @@ import {
   onlySetCurrentName,
 } from './pomodoroNames';
 
+jest.mock('components/Molecules/Timer/Requests');
+
 describe('pomodoroNames', () => {
   describe('changeCurrentNamePomodoro', () => {
     it('Should create an action to set current name of pomodoro, when tab is NOT 5 length', () => {

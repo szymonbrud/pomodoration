@@ -5,7 +5,6 @@ import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
-import { saveMyPomodorosNamesToDatabase } from 'components/Molecules/Timer/Requests';
 
 const StyledMainWrapper = styled.div`
   height: 35vh;
@@ -69,7 +68,8 @@ const StyledButton = styled.button`
   font-size: 2rem;
 `;
 
-// TODO: tests
+// TODO: ten plik będzie testowany integracyjne razem z drguim
+
 const SetNewNameBottomPanel = ({ action, open }) => {
   const dispatch = useDispatch();
   const nameOfLastPomodoros = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);
@@ -102,6 +102,7 @@ const SetNewNameBottomPanel = ({ action, open }) => {
                 color="white"
                 width="80%"
                 height="47px"
+                data-testid="input"
               />
               <StyledPostionWrapper>
                 <StyledButton type="button" onClick={action}>

@@ -99,21 +99,21 @@ const ShowHistoryOfTimeButton = () => {
     }, 300);
   };
 
-  const startedMove = e => {
-    // I have started
-  };
+  // const startedMove = e => {
+  //   // I have started
+  // };
 
-  const stopedMove = e => {
-    // I have stoped
-  };
+  // const stopedMove = e => {
+  //   // I have stoped
+  // };
 
   return (
     <>
       <StyledWrapperLine
         currentPostion={currentPositionOfSlide}
         onTouchMove={e => move(e.touches[0].clientY)}
-        onTouchStart={e => startedMove(e)}
-        onTouchEnd={e => stopedMove(e)}
+        // onTouchStart={e => startedMove(e)}
+        // onTouchEnd={e => stopedMove(e)}
         onClick={e => whenIsMoving(e)}
         animateSliding={animateSliding}
         data-testid="openButton"

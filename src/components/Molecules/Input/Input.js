@@ -72,7 +72,6 @@ const StyledInput = styled(Field)`
   border-radius: 5px;
   padding: 5%;
   border: none;
-  text-align: ${({ center }) => center && 'center'};
   font-size: 1.8rem;
 
   :focus {
@@ -80,18 +79,7 @@ const StyledInput = styled(Field)`
   }
 `;
 
-const NewInput = ({
-  active,
-  placeholder,
-  name,
-  center,
-  margin,
-  textarea,
-  height,
-  width,
-  type,
-  color,
-}) => {
+const NewInput = ({ active, placeholder, name, margin, textarea, height, width, type, color }) => {
   const [focus, setFocus] = useState(false);
 
   const chendlechangeFocus = e => {
@@ -115,9 +103,9 @@ const NewInput = ({
         name={name}
         onBlur={chendlechangeFocus}
         onFocus={chendlechangeFocus}
-        center={center}
         as={Field}
         type={type || ''}
+        data-testid="input"
       />
     </StyledMainWrapper>
   );
@@ -133,7 +121,6 @@ NewInput.propTypes = {
   width: propTypes.string,
   type: propTypes.string,
   color: propTypes.string,
-  center: propTypes.bool,
 };
 
 NewInput.defaultProps = {
@@ -145,7 +132,6 @@ NewInput.defaultProps = {
   width: '',
   type: '',
   color: '',
-  center: false,
 };
 
 export default NewInput;

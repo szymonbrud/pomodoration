@@ -27,9 +27,7 @@ export const getCurrentTime = time => {
 };
 
 export const getDatabaseFormatDate = (minusDay = 0, time) => {
-  const { dateDay, dateHours, dateMinutes, dateMonth, dateSecound, dateYear } = getCurrentTime(
-    time,
-  );
+  const { dateDay, dateMonth, dateYear } = getCurrentTime(time);
 
   const date = new Date(dateYear, dateMonth, dateDay - minusDay);
   const currentDay = addZero(date.getDate());
@@ -43,7 +41,6 @@ export const chengeDateToDateWithKoma = date => {
   return `${date[0]}${date[1]}.${date[3]}${date[4]}`;
 };
 
-// to są funckcje które ze sobą wspógrają
 const changeDateToNumber = date => {
   let day = date[0] + date[1];
   day = parseInt(day, 10);
@@ -59,9 +56,7 @@ const changeDateToNumber = date => {
   };
 };
 
-const sortFunc = (a, b) => {
-  return b - a;
-};
+const sortFunc = (a, b) => b - a;
 
 export const sortData = date => {
   let dateTab = [];
@@ -96,5 +91,3 @@ export const changeSecoundsToMinAndSec = secounds => {
   min = addZero(min);
   return `${min}min`;
 };
-
-// TODO: Powydzielać tym funkcją małe zadania, dobrze ponazywać te funkcje oraz zrobić tab aby dobrze ze sobą współpracowały. (Może dodać moduły czy coś takiego )

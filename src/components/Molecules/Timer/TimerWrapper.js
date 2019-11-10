@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import firebase from 'firebase';
 import { useDispatch } from 'react-redux';
-import { loadingDataStatus } from 'actions';
+import { changeLoadingDataStatus } from 'actions/changeDataLoadingStatus';
 import { onlySetCurrentName } from 'actions/pomodoroNames';
-import downloadNamesOfLastPomodoros from 'actions/downloadData/downloadNamesOfLastPomodoros';
 
 const TimerWrapper = ({ children }) => {
   const database = firebase.database();
@@ -12,7 +11,6 @@ const TimerWrapper = ({ children }) => {
   const [status, setStatus] = useState();
   const [getNewState, setGetNewState] = useState(false);
   const dispatch = useDispatch();
-  dispatch(downloadNamesOfLastPomodoros());
 
   // nie wiem po co to ale jak by coś nie działało to mażna to odblokować
   // const pomodorosAllLast = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);
@@ -28,7 +26,7 @@ const TimerWrapper = ({ children }) => {
       }
       if (!document.hidden && !loading) {
         loading = true;
-        dispatch(loadingDataStatus(true));
+        dispatch(changeLoadingDataStatus(true));
       }
       setGetNewState(document.hidden);
     },

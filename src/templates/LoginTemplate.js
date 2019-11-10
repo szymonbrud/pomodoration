@@ -31,6 +31,12 @@ const H1 = styled.h1`
   font-size: 35px;
 `;
 
+const SmallTextBellowLoginButton = styled.p`
+  margin: 20px 0 42px 5%;
+  color: white;
+  opacity: 0.7;
+`;
+
 // TODO: napiać prop types do tego, moge wyszukać w necie jakie prop types do tego pasują
 const LoginTemplate = ({ user, signOut, signInWithGoogle }) => {
   const [currentLogin, setCurrentLogin] = useState(false);
@@ -65,6 +71,7 @@ const LoginTemplate = ({ user, signOut, signInWithGoogle }) => {
       ) : (
         <LoginButton textInButton="zaloguj się przez google" action={LoginAction} />
       )}
+      <SmallTextBellowLoginButton>Więcej metod logowania już wkrótce</SmallTextBellowLoginButton>
     </StyledMainWrapper>
   );
 };

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import NewInput from 'components/Molecules/Input/Input';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
 import media from 'assets/styles/media';
 import { changeSetNameBottomPanel } from 'actions/visibleOfComponents';

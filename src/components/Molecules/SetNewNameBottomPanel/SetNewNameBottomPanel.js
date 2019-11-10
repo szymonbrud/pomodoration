@@ -134,8 +134,4 @@ const SetNewNameBottomPanel = () => {
   );
 };
 
-SetNewNameBottomPanel.propTypes = {
-  action: PropTypes.func.isRequired,
-};
-
 export default SetNewNameBottomPanel;

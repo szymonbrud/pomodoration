@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
-import SetNewNameBottomPanel from 'components/Molecules/SetNewNameBottomPanel/SetNewNameBottomPanel';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
+import media from 'assets/styles/media';
+import { changeSetNameBottomPanel } from 'actions/visibleOfComponents';
 
 const StyledMainWrapper = styled.div`
   width: 50%;
@@ -10,9 +11,14 @@ const StyledMainWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${media.desktop`
+    width: 36%;
+  `}
 `;
 
 const StyledMainRoller = styled.p`
+  user-select: none;
   margin: 0;
   padding: 0;
   color: ${({ theme }) => theme.perpule};
@@ -78,17 +84,23 @@ const StyledCloseWrapper = styled.div`
   height: 100vh;
   background: none;
   position: fixed;
+
+  ${media.desktop`
+    height: 70vh;
+  `}
 `;
 
 const StyledSmallInformation = styled.p`
   margin: 10px 16px 0;
   font-size: 17px;
   color: rgba(116, 104, 248, 0.7);
+  user-select: none;
 `;
 
 const OneElementOfList = styled.p`
   font-size: 1.8rem;
   margin: 10px 16px 0;
+  user-select: none;
 `;
 
 const StyledOneOption = styled.div`
@@ -105,30 +117,28 @@ const StyledAddNewNameP = styled.p`
   color: rgba(116, 104, 248, 0.7);
   margin: 0 13px;
   padding: 13px 3px;
+  user-select: none;
 `;
 
 const SetName = () => {
   const dispatch = useDispatch();
   const pomodoroNames = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);
   const [open, setOpen] = useState(false);
-  const [openDownBar, setOpenDownBar] = useState(false);
 
   const changeOpen = () => {
     setOpen(!open);
   };
 
-  const changeOpenDownBar = () => {
-    setOpenDownBar(false);
-  };
-
   const OpenBarAndCloseList = () => {
+    dispatch(changeSetNameBottomPanel(true));
+
     setOpen(!open);
-    setOpenDownBar(true);
+    // setOpenDownBar(true);
   };
 
   const setOptionFromList = name => {
     dispatch(changeCurrentNamePomodoro(name, pomodoroNames));
-    changeOpen();
+    changeSetNameBottomPanel();
   };
 
   // TODO: wywalić testy tego pliku i dodać je jako integracyjne
@@ -154,11 +164,6 @@ const SetName = () => {
         </StyledMainSelecter>
         <StyledCloseWrapper open={open} onClick={() => changeOpen()} />
       </StyledMainWrapper>
-      <SetNewNameBottomPanel
-        open={openDownBar}
-        action={changeOpenDownBar}
-        data-testid="SetNewNameBottomPanel"
-      />
     </>
   );
 };

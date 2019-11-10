@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import LoadingAnimation from 'components/Molecules/LoadingAnimation/LoadingAnimation';
+import media from 'assets/styles/media';
 import useTimer from './useTimer';
 
 const StyledTimerWarpper = styled.div`
@@ -12,12 +13,22 @@ const StyledTimerWarpper = styled.div`
   align-items: center;
   flex-direction: column;
   position: relative;
+
+  ${media.desktop`
+    justify-content: center;
+    height: 100%;
+  `}
 `;
 
 const StyledTimer = styled.h1`
   margin-top: 15vh;
   font-size: 3.6rem;
   color: ${({ theme }) => theme.blue};
+
+  ${media.desktop`
+    /* transform: translateY(100%); */
+    margin: 0;
+  `}
 `;
 
 const WrapperButtons = styled.div`
@@ -25,6 +36,13 @@ const WrapperButtons = styled.div`
   display: flex;
   margin-top: 10vh;
   justify-content: space-around;
+
+  ${media.desktop`
+    position: absolute;
+    margin: 0;
+    bottom: 0;
+    transform: translateY(calc(100% + 20px));
+  `}
 `;
 
 const Timer = ({ ItsTime, status }) => {

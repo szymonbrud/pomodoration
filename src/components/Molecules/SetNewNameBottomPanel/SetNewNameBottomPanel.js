@@ -5,6 +5,8 @@ import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
+import media from 'assets/styles/media';
+import { changeSetNameBottomPanel } from 'actions/visibleOfComponents';
 
 const StyledMainWrapper = styled.div`
   height: 35vh;
@@ -21,6 +23,13 @@ const StyledMainWrapper = styled.div`
   transform: ${({ open }) => (open ? 'translateY(0%)' : 'translateY(100%)')};
   transition: transform 0.2s;
   z-index: 5000;
+
+  ${media.desktop`
+    display: none;
+    /* width: 100%;
+    height: 100vh;
+    position: fixed; */
+  `}
 `;
 
 const StyledClickPaddingForBeam = styled.button`
@@ -70,18 +79,23 @@ const StyledButton = styled.button`
 
 // TODO: ten plik będzie testowany integracyjne razem z drguim
 
-const SetNewNameBottomPanel = ({ action, open }) => {
+const SetNewNameBottomPanel = () => {
   const dispatch = useDispatch();
   const nameOfLastPomodoros = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);
+  const open = useSelector(state => state.visibleOfComponents.isSetNameBottomPanelVisible);
 
   const sedToRedux = name => {
     dispatch(changeCurrentNamePomodoro(name, nameOfLastPomodoros));
   };
 
+  const offPanel = () => {
+    dispatch(changeSetNameBottomPanel(false));
+  };
+
   return (
     <>
       <StyledMainWrapper open={open} data-testid="bottomBarMainWrapper">
-        <StyledClickPaddingForBeam onClick={action}>
+        <StyledClickPaddingForBeam onClick={offPanel}>
           <StyledCloseBeam />
         </StyledClickPaddingForBeam>
         <StyledNameWindow>dodaj nazwę</StyledNameWindow>
@@ -89,7 +103,7 @@ const SetNewNameBottomPanel = ({ action, open }) => {
           initialValues={{ name: '' }}
           onSubmit={(values, { setSubmitting }) => {
             sedToRedux(values.name);
-            action();
+            offPanel();
             setSubmitting(false);
           }}
         >
@@ -105,7 +119,7 @@ const SetNewNameBottomPanel = ({ action, open }) => {
                 data-testid="input"
               />
               <StyledPostionWrapper>
-                <StyledButton type="button" onClick={action}>
+                <StyledButton type="button" onClick={offPanel}>
                   back
                 </StyledButton>
                 <StyledButton type="submit" disabled={isSubmitting}>
@@ -122,11 +136,6 @@ const SetNewNameBottomPanel = ({ action, open }) => {
 
 SetNewNameBottomPanel.propTypes = {
   action: PropTypes.func.isRequired,
-  open: PropTypes.bool,
-};
-
-SetNewNameBottomPanel.defaultProps = {
-  open: false,
 };
 
 export default SetNewNameBottomPanel;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'assets/styles/media';
 
 const StyledMainWrapper = styled.div`
   width: 45%;
@@ -8,6 +9,10 @@ const StyledMainWrapper = styled.div`
   position: absolute;
   top: -11px;
   left: 12%;
+
+  ${media.desktop`
+    width: 33%;
+  `}
 `;
 
 export default StyledMainWrapper;

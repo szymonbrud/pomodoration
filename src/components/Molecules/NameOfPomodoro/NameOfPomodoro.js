@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import propTypes from 'prop-types';
+import media from 'assets/styles/media';
 
 const StyledH1 = styled.h1`
   position: absolute;
@@ -11,6 +12,10 @@ const StyledH1 = styled.h1`
   color: ${({ theme }) => theme.blue};
   font-size: 2rem;
   font-weight: 300;
+
+  ${media.desktop`
+    top: -12vw;
+  `}
 `;
 
 const NameOfPomodoro = ({ name }) => {

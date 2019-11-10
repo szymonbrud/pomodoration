@@ -1,10 +1,15 @@
 import Icon from 'components/Icon/Icon';
 import styled from 'styled-components';
+import media from 'assets/styles/media';
 
 export const StyledMainWrapper = styled.nav`
   background: ${({ theme }) => theme.BGblue};
   min-height: 15vh;
   width: 100%;
+
+  ${media.desktop`
+    display: none;
+  `}
 `;
 
 export const StyledH2 = styled.h2`

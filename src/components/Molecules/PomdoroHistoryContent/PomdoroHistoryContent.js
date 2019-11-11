@@ -71,7 +71,7 @@ const PomdoroHistoryContent = () => {
       </>
     );
   }
-  return <LoadingAnimation data-testid="patagraph">ładowanie</LoadingAnimation>;
+  return <LoadingAnimation data-testid="patagraph" text="ładowanie" />;
 };
 
 export default PomdoroHistoryContent;

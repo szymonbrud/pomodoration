@@ -77,6 +77,14 @@ export const saveMyPomodoroToDatabase = (time, title = 'programowanie') => {
     });
   });
 
+  const objectToSend = {
+    title,
+    dateSerch: fullDateToDatabase,
+    date: new Date().getTime(),
+    time,
+    pomodoro: 1,
+  };
+
   getData.then(() => {
     if (elementWas) {
       firebase
@@ -99,13 +107,7 @@ export const saveMyPomodoroToDatabase = (time, title = 'programowanie') => {
       firebase
         .database()
         .ref(`users/${userId}/hostoryOfPomdoro/${newPomodoroKay}`)
-        .set({
-          title,
-          dateSerch: fullDateToDatabase,
-          date: new Date().getTime(),
-          time,
-          pomodoro: 1,
-        });
+        .set(objectToSend);
     }
   });
 };

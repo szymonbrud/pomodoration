@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import ContentMenu from 'components/Molecules/ContentMenu/ContentMenu';
 
 const StyledWrapperButton = styled.button`
   width: 29px;
@@ -11,6 +12,7 @@ const StyledWrapperButton = styled.button`
   position: absolute;
   right: 5px;
   top: 5px;
+  z-index: 6000;
 `;
 
 const StyledLine = styled.div`
@@ -42,10 +44,16 @@ const StyledLine = styled.div`
   }
 `;
 
-const Burger = () => (
-  <StyledWrapperButton>
-    <StyledLine />
-  </StyledWrapperButton>
-);
+const Burger = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(null);
+  return (
+    <>
+      <ContentMenu isMenuOpen={isMenuOpen} />
+      <StyledWrapperButton onClick={() => setIsMenuOpen(prev => !prev)}>
+        <StyledLine />
+      </StyledWrapperButton>
+    </>
+  );
+};
 
 export default Burger;

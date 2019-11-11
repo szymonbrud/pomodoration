@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { addZero } from 'functions';
 import { useSelector, useDispatch } from 'react-redux';
 import InterfaceSwitchButtonsRender from 'components/Molecules/Timer/InterfaceSwitchButtonsRender';
-import { downloadData } from 'actions/downloadSessionsFromDatabase';
 import { changeLoadingDataStatus } from 'actions/changeDataLoadingStatus';
+
 import {
   SendRunAction,
   SendPauseAction,
@@ -16,6 +16,7 @@ const useTimer = (startTime, status) => {
   const [actionTimer, setActionsTimer] = useState();
   const dispatch = useDispatch();
   const nameOfPomodoroState = useSelector(state => state.pomodoroNames.currentPomodoroName);
+  const historyOfPomodoroAll = useSelector(state => state.historyOfPomodoro.pomodoroSessions);
 
   if (status === 'reset' || status === 'pause') {
     dispatch(changeLoadingDataStatus(false));
@@ -70,9 +71,8 @@ const useTimer = (startTime, status) => {
 
   const resetApp = () => {
     setActionsTimer('reset');
-    dispatch(downloadData(false));
-    SendResetAction();
     saveMyPomodoroToDatabase(1500 - currentTime, nameOfPomodoroState);
+    SendResetAction();
   };
 
   const buttons = (

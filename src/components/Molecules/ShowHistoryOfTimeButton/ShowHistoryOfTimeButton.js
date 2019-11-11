@@ -4,6 +4,7 @@ import HistoryPomodoro from 'components/Molecules/HistoryPomodoro/HistoryPomodor
 import debounce from 'lodash.debounce';
 import { useDispatch, useSelector } from 'react-redux';
 import downloadSessions from 'actions/downloadData/downloadSessionsFromFirebase';
+import media from 'assets/styles/media';
 
 const StyledWrapperLine = styled.div`
   position: fixed;
@@ -17,6 +18,10 @@ const StyledWrapperLine = styled.div`
   flex-direction: column;
   z-index: 1000;
   transition: ${({ animateSliding }) => animateSliding && 'transform .3s'};
+
+  ${media.desktop`
+    display: none;
+  `}
 `;
 
 const StyledText = styled.p`
@@ -53,19 +58,16 @@ const ShowHistoryOfTimeButton = () => {
   const [active, setActive] = useState(false);
   const [animateSliding, setAnimateSliding] = useState(false);
   const [animateActivite, setAnimateActivite] = useState(false);
-  const downloadDataState = useSelector(state => state.downloadData);
+  const downloadDataState = useSelector(state => state.historyOfPomodoro.downloadData);
   const dispatch = useDispatch();
-
-  const downloadData = () => {
-    if (!downloadDataState) {
-      dispatch(downloadSessions());
-    }
-  };
+  console.log(downloadDataState);
+  if (!downloadDataState) {
+    dispatch(downloadSessions());
+  }
 
   useEffect(() => {
     if (currentPositionOfSlide < (window.innerHeight / 20) * 19.2) {
       if (!active) {
-        downloadData();
         setAnimateActivite(true);
         setActive(true);
         setTimeout(() => {

@@ -139,6 +139,7 @@ const SetName = () => {
   const setOptionFromList = name => {
     dispatch(changeCurrentNamePomodoro(name, pomodoroNames));
     changeSetNameBottomPanel();
+    changeOpen();
   };
 
   // TODO: wywalić testy tego pliku i dodać je jako integracyjne

@@ -7,6 +7,25 @@ import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
 import media from 'assets/styles/media';
 import { changeSetNameBottomPanel } from 'actions/visibleOfComponents';
 
+const StyledMainPossitionWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5000;
+
+  ${media.desktop`
+    bottom: unset;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.2);
+    display: ${({ open }) => (open ? 'flex' : 'none')};
+    align-items: center;
+    justify-content: center;
+  `}
+`;
+
 const StyledMainWrapper = styled.div`
   height: 35vh;
   position: fixed;
@@ -24,10 +43,13 @@ const StyledMainWrapper = styled.div`
   z-index: 5000;
 
   ${media.desktop`
-    display: none;
-    /* width: 100%;
-    height: 100vh;
-    position: fixed; */
+    max-width: 500px;
+    width: 30%;
+    max-height: 280px;
+    height: 32vh;
+    transform: unset;
+    position: static;
+    border-radius: 20px;
   `}
 `;
 
@@ -37,6 +59,10 @@ const StyledClickPaddingForBeam = styled.button`
   top: 6px;
   background: none;
   border: none;
+
+  ${media.desktop`
+    display: none;
+  `}
 `;
 
 const StyledCloseBeam = styled.div`
@@ -49,6 +75,10 @@ const StyledCloseBeam = styled.div`
 const StyledNameWindow = styled.p`
   font-size: 2rem;
   color: white;
+
+  ${media.desktop`
+    margin-bottom: auto;    
+  `}
 `;
 
 const StyledForm = styled.form`
@@ -64,6 +94,11 @@ const StyledPostionWrapper = styled.div`
   width: 80%;
   justify-content: space-around;
   margin-top: 40px;
+
+  ${media.desktop`
+    margin-bottom: 25px;
+    width: 85%;
+  `}
 `;
 
 const StyledButton = styled.button`
@@ -93,42 +128,44 @@ const SetNewNameBottomPanel = () => {
 
   return (
     <>
-      <StyledMainWrapper open={open} data-testid="bottomBarMainWrapper">
-        <StyledClickPaddingForBeam onClick={offPanel}>
-          <StyledCloseBeam />
-        </StyledClickPaddingForBeam>
-        <StyledNameWindow>dodaj nazwę</StyledNameWindow>
-        <Formik
-          initialValues={{ name: '' }}
-          onSubmit={(values, { setSubmitting }) => {
-            sedToRedux(values.name);
-            offPanel();
-            setSubmitting(false);
-          }}
-        >
-          {({ isSubmitting, handleSubmit }) => (
-            <StyledForm onSubmit={handleSubmit}>
-              <NewInput
-                active
-                name="name"
-                placeholder="nazwa"
-                color="white"
-                width="80%"
-                height="47px"
-                data-testid="input"
-              />
-              <StyledPostionWrapper>
-                <StyledButton type="button" onClick={offPanel}>
-                  back
-                </StyledButton>
-                <StyledButton type="submit" disabled={isSubmitting}>
-                  done
-                </StyledButton>
-              </StyledPostionWrapper>
-            </StyledForm>
-          )}
-        </Formik>
-      </StyledMainWrapper>
+      <StyledMainPossitionWrapper open={open}>
+        <StyledMainWrapper open={open} data-testid="bottomBarMainWrapper">
+          <StyledClickPaddingForBeam onClick={offPanel}>
+            <StyledCloseBeam />
+          </StyledClickPaddingForBeam>
+          <StyledNameWindow>dodaj nazwę</StyledNameWindow>
+          <Formik
+            initialValues={{ name: '' }}
+            onSubmit={(values, { setSubmitting }) => {
+              sedToRedux(values.name);
+              offPanel();
+              setSubmitting(false);
+            }}
+          >
+            {({ isSubmitting, handleSubmit }) => (
+              <StyledForm onSubmit={handleSubmit}>
+                <NewInput
+                  active
+                  name="name"
+                  placeholder="nazwa"
+                  color="white"
+                  width="80%"
+                  height="47px"
+                  data-testid="input"
+                />
+                <StyledPostionWrapper>
+                  <StyledButton type="button" onClick={offPanel}>
+                    back
+                  </StyledButton>
+                  <StyledButton type="submit" disabled={isSubmitting}>
+                    done
+                  </StyledButton>
+                </StyledPostionWrapper>
+              </StyledForm>
+            )}
+          </Formik>
+        </StyledMainWrapper>
+      </StyledMainPossitionWrapper>
     </>
   );
 };

@@ -15,24 +15,16 @@ export default () => {
   let pomodoroSessions = [];
 
   return dispatch => {
-    const getData = new Promise(resolve => {
-      query.once('value').then(snapshot => {
-        snapshot.forEach(childSnapshot => {
-          pomodoroSessions = [...pomodoroSessions, childSnapshot.val()];
-        });
-        resolve();
+    query.on('value', snapshot => {
+      snapshot.forEach(childSnapshot => {
+        pomodoroSessions = [...pomodoroSessions, childSnapshot.val()];
       });
+      if (pomodoroSessions !== 0) {
+        dispatch(downloadPomodoroSessions(pomodoroSessions));
+        dispatch(getDateFromDataAndSort(pomodoroSessions));
+        dispatch(downloadData(true));
+      }
+      pomodoroSessions = [];
     });
-
-    getData
-      .then(() => {
-        return dispatch(downloadPomodoroSessions(pomodoroSessions));
-      })
-      .then(() => {
-        return dispatch(getDateFromDataAndSort(pomodoroSessions));
-      })
-      .then(() => {
-        return dispatch(downloadData(true));
-      });
   };
 };

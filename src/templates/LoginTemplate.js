@@ -1,14 +1,14 @@
 // TODO: napisać testy do tego komponentu, myślę że się da, gdy będę manipulować mock fierbase
 
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import firebase from 'firebase';
 import 'firebase/auth';
 import withFirebaseAuth from 'react-with-firebase-auth';
 import { Redirect } from 'react-router-dom';
 import LoginButton from 'components/LoginButton/LoginButton';
 import styled from 'styled-components';
+import LoadingAnimation from 'components/Molecules/LoadingAnimation/LoadingAnimation';
 import { firebaseApp } from '../firebaseConfig';
-import { AuthContext } from '../Auth';
 
 const StyledMainWrapper = styled.section`
   width: 100%;
@@ -37,41 +37,67 @@ const SmallTextBellowLoginButton = styled.p`
   opacity: 0.7;
 `;
 
+const StyledWrapperPositionAnimation = styled.div`
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  background: ${({ theme }) => theme.BGblue};
+`;
+
 // TODO: napiać prop types do tego, moge wyszukać w necie jakie prop types do tego pasują
-const LoginTemplate = ({ user, signOut, signInWithGoogle }) => {
-  const [currentLogin, setCurrentLogin] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+const LoginTemplate = ({ user }) => {
+  const [isLoadingDuringAction, setIsLoadingDuringAction] = useState(false);
+  const [isNOTFirstUserLogin, setIsNOTFirstUserLogin] = useState(null);
 
-  if (currentLogin) {
-    if (currentUser) return <Redirect to="/timer" />;
-  }
-
+  const authenticationAnimationStart = () => {
+    setIsLoadingDuringAction(true);
+    setTimeout(() => {
+      setIsLoadingDuringAction(false);
+    }, 30000);
+  };
   const LoginAction = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebaseApp.auth().signInWithRedirect(provider);
-    setCurrentLogin(true);
+    authenticationAnimationStart();
   };
 
-  const rediretMe = () => {
-    setCurrentLogin(true);
-  };
+  if (user) {
+    const userId = firebase.auth().currentUser.uid;
+    firebase
+      .database()
+      .ref(`/users/${userId}/isFirstLogin`)
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()) {
+          setIsNOTFirstUserLogin(true);
+        } else {
+          setIsNOTFirstUserLogin(false);
+        }
+      });
+  }
+
+  if (isNOTFirstUserLogin) {
+    return <Redirect to="/timer" />;
+  }
+
+  if (isNOTFirstUserLogin === false) {
+    return <Redirect to="/firstLogin" />;
+  }
 
   return (
     <StyledMainWrapper>
       <H2 id="h2">Hello</H2>
-      {/* TODO: co to za linia i poco ją tu wrzuciełem */}
-      {/* onClick={() => ServiceWorkerGlobalScope.onnotificationclick} */}
       <H1>Pomodoro app</H1>
-      {/* TODO: dodać w przyszłości że jeżeli user jest aktywny to odrazu go prze redirectować bęzie lepiej */}
-      {user ? (
-        <>
-          <LoginButton textInButton="przejdz do aplikacji" action={rediretMe} LogoActive={false} />
-          <LoginButton textInButton="wyloguj się" action={signOut} />
-        </>
-      ) : (
-        <LoginButton textInButton="zaloguj się przez google" action={LoginAction} />
-      )}
+      {!user && <LoginButton textInButton="zaloguj się przez google" action={LoginAction} />}
       <SmallTextBellowLoginButton>Więcej metod logowania już wkrótce</SmallTextBellowLoginButton>
+      {isLoadingDuringAction && (
+        <StyledWrapperPositionAnimation>
+          <LoadingAnimation text="autntentykacja" />
+        </StyledWrapperPositionAnimation>
+      )}
     </StyledMainWrapper>
   );
 };

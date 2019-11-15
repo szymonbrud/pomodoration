@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase';
+import propTypes from 'prop-types';
 
 const openAnimation = keyframes`
   0%{
@@ -32,6 +33,8 @@ const StyledMainWrapper = styled.div`
   background: ${({ theme }) => theme.blue};
   z-index: 5000;
 
+
+  //TODO: do somethink with this
   ${({ isMenuOpen }) =>
     isMenuOpen === null
       ? css`
@@ -123,3 +126,11 @@ const ContentMenu = ({ isMenuOpen }) => {
 };
 
 export default ContentMenu;
+
+ContentMenu.propTypes = {
+  isMenuOpen: propTypes.bool,
+};
+
+ContentMenu.defaultProps = {
+  isMenuOpen: false,
+};

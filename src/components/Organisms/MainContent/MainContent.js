@@ -8,6 +8,7 @@ import TimerWrapper from 'components/Molecules/Timer/TimerWrapper';
 import downloadNamesOfLastPomodoros from 'actions/downloadData/downloadNamesOfLastPomodoros';
 import ShowHistoryOfTimeButton from 'components/Molecules/ShowHistoryOfTimeButton/ShowHistoryOfTimeButton';
 import media from 'assets/styles/media';
+import MenuDesktop from 'components/Molecules/MenuDesktop/MenuDesktop';
 
 const StyledMainWrapper = styled.div`
   position: relative;
@@ -42,6 +43,7 @@ const MainContent = () => {
           {({ ItsTime, status }) => <Timer data-testid="timer" ItsTime={ItsTime} status={status} />}
         </TimerWrapper>
         <ShowHistoryOfTimeButton />
+        <MenuDesktop />
       </StyledMainWrapper>
     </>
   );

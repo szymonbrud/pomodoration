@@ -20,7 +20,7 @@ const TopBar = () => {
       <Burger data-test="burger" />
       <StyledIcon src={magnifier} data-test="icon" />
       <StyledH2 data-test="Text">
-        hello
+        helloo
         <br />
         <StyledName>{userName}</StyledName>
       </StyledH2>

@@ -1,5 +1,8 @@
 export const addZero = item => {
-  return item < 10 ? `0${item}` : item;
+  if (item < 10 && item >= 0) {
+    return `0${item}`;
+  }
+  return item;
 };
 
 export const getCurrentTime = time => {

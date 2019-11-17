@@ -74,12 +74,15 @@ const StyledElementOfMenu = styled(Link)`
 `;
 
 const StyledLogOutButton = styled.button`
-  background: none;
+  width: 100%;
+  height: 14vh;
+  background: ${({ theme }) => theme.red};
   border: none;
-  color: ${({ theme }) => theme.red};
+  color: white;
   font-size: 2.8rem;
-  margin: auto 0 8vh 0;
+  margin: auto 0 2vh 0;
   padding: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 const menuConfig = [
@@ -89,7 +92,7 @@ const menuConfig = [
   },
   {
     title: 'o aplikacji',
-    link: '/aboutApp',
+    link: '/about',
   },
 ];
 

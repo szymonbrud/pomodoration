@@ -6,6 +6,7 @@ import TimerTemplate from 'templates/TimerTemplate';
 import 'firebase/auth';
 import PrivateRoute from 'components/PrivateRoute.js/PrivateRoute';
 import FirstLoginTemplate from 'templates/FirstLoginTemplate';
+import AboutTemplate from 'templates/AboutTemplate';
 import { AuthProvider } from './Auth';
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <MainTemplate>
           <Switch>
             <PrivateRoute exact path="/timer" component={TimerTemplate} />
+            <PrivateRoute exact path="/about" component={AboutTemplate} />
             <PrivateRoute exact path="/firstLogin" component={FirstLoginTemplate} />
             <Route exact path="/" component={LoginTemplate} />
           </Switch>

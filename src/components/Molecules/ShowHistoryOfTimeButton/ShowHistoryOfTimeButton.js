@@ -60,7 +60,6 @@ const ShowHistoryOfTimeButton = () => {
   const [animateActivite, setAnimateActivite] = useState(false);
   const downloadDataState = useSelector(state => state.historyOfPomodoro.downloadData);
   const dispatch = useDispatch();
-  console.log(downloadDataState);
   if (!downloadDataState) {
     dispatch(downloadSessions());
   }

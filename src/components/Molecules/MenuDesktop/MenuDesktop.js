@@ -84,7 +84,7 @@ const menuConfig = [
   },
   {
     title: 'o aplikacji',
-    link: '/aboutApp',
+    link: '/about',
   },
 ];
 

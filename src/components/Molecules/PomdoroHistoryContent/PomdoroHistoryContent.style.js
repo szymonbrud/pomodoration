@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import media from 'assets/styles/media';
 
 export const StyledPositionWrapperOfNamesSestions = styled.div`
   margin: 4vh 5% 0;
@@ -110,4 +111,16 @@ export const STyledInnerWHiteText = styled.p`
   width: 100%;
   text-align: center;
   width: 70%;
+`;
+
+export const StyledMainNameSection = styled.h1`
+  display: none;
+
+  ${media.desktop`
+    display: inline;
+    color: white;
+  font-weight: 400;
+  font-size: 2.3rem;
+  margin-top: -20px;
+  `}
 `;

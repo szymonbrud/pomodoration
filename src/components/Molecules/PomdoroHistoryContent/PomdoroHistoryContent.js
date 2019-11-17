@@ -20,6 +20,7 @@ import {
   StyledInsideWrapperOfsessionSecound,
   StyledWrapperForText,
   STyledInnerWHiteText,
+  StyledMainNameSection,
 } from './PomdoroHistoryContent.style';
 
 const PomdoroHistoryContent = () => {
@@ -41,6 +42,7 @@ const PomdoroHistoryContent = () => {
       <>
         <StyledPositionWrapperOfNamesSestions>
           <StyledNameOfSections>nazwa</StyledNameOfSections>
+          <StyledMainNameSection>ostatnie sesje</StyledMainNameSection>
           <StyledNameOfSections>czas</StyledNameOfSections>
         </StyledPositionWrapperOfNamesSestions>
         {allDate.length === 0 ? (

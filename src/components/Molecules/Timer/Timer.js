@@ -26,7 +26,6 @@ const StyledTimer = styled.h1`
   color: ${({ theme }) => theme.blue};
 
   ${media.desktop`
-    /* transform: translateY(100%); */
     margin: 0;
   `}
 `;
@@ -55,7 +54,7 @@ const Timer = ({ ItsTime, status }) => {
       ) : (
         <>
           <StyledTimer>
-            {minutes} : {secounds}
+            {minutes < 0 ? minutes + 1 : minutes} : {secounds}
           </StyledTimer>
           <WrapperButtons>{buttons}</WrapperButtons>
         </>

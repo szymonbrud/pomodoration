@@ -76,9 +76,6 @@ export const StyledSessionNumber = styled.p`
   color: white;
   font-size: 1.9rem;
   opacity: 0.7;
-  /* margin: 0 10px;
-  justify-self: center;
-  align-self: center; */
 `;
 export const StyledNameOFSession = styled.p`
   color: white;
@@ -97,4 +94,20 @@ export const StyledLine = styled.div`
 export const StyledTimeOfSession = styled.p`
   margin: 0;
   color: white;
+`;
+
+export const StyledWrapperForText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  width: 100%;
+`;
+
+export const STyledInnerWHiteText = styled.p`
+  color: white;
+  font-size: 1.6rem;
+  width: 100%;
+  text-align: center;
+  width: 70%;
 `;

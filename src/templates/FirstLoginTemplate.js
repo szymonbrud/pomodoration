@@ -5,12 +5,19 @@ import checkTheList from 'assets/images/checkTheList.svg';
 import working from 'assets/images/working.svg';
 import arrow from 'assets/icons/arrow.svg';
 import { Redirect } from 'react-router-dom';
+import media from 'assets/styles/media';
 import useFirstLoginAnimation from './useFirstLoginAnimation';
 
 const StyledMainTemplate = styled.div`
   width: 100%;
   height: 100vh;
   background: #6762ff;
+
+  ${media.desktop`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `}
 `;
 
 const StyledTopTable = styled.div`
@@ -20,6 +27,10 @@ const StyledTopTable = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  ${media.desktop`
+    display: none;
+  `}
 `;
 
 const StyledOneTable = styled.div`
@@ -59,10 +70,29 @@ const StyledWrapperForOneSection = styled.section`
         css`
           transform: translate(-100%);
         `}
+
+  ${media.desktop`
+    width: 33%;
+    position: relative;
+    transform: unset;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    ${({ currentSection, index }) =>
+      currentSection >= index &&
+      css`
+        opacity: 1;
+      `}
+    
+  `}
 `;
 
 const StyledImageForOneSection = styled.img`
   width: 80%;
+
+  ${media.desktop`
+    width: 60%;
+  `}
 `;
 
 const StyledTextForOneSection = styled.p`
@@ -99,7 +129,7 @@ const StyledIcon = styled.img`
 const tabOfTextAndImage = [
   {
     text: 'Wybierz nazwę czynności i pracuj przez wyznaczony czas',
-    image: beHappyAfterFinishWork,
+    image: working,
   },
   {
     text: 'Kontroluj wyniki i poprawiaj się',
@@ -107,7 +137,7 @@ const tabOfTextAndImage = [
   },
   {
     text: 'osiągaj cele',
-    image: working,
+    image: beHappyAfterFinishWork,
   },
 ];
 
@@ -115,7 +145,6 @@ const FirstLoginTemplate = () => {
   const { currentSection, nextSection } = useFirstLoginAnimation();
 
   if (currentSection === 3) {
-    // TODO: dodać aby tutaj dodawało nam do bazy danych że już nie jest nasze pierwsaze wejście
     return <Redirect to="/timer" />;
   }
 

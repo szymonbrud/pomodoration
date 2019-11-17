@@ -18,6 +18,8 @@ import {
   StyledTimeOfSession,
   StyledInsideWrapperOfSession,
   StyledInsideWrapperOfsessionSecound,
+  StyledWrapperForText,
+  STyledInnerWHiteText,
 } from './PomdoroHistoryContent.style';
 
 const PomdoroHistoryContent = () => {
@@ -41,36 +43,43 @@ const PomdoroHistoryContent = () => {
           <StyledNameOfSections>nazwa</StyledNameOfSections>
           <StyledNameOfSections>czas</StyledNameOfSections>
         </StyledPositionWrapperOfNamesSestions>
-        {allDate.map((eAllDate, index) => (
-          <div key={`id_${eAllDate}`}>
-            <StyledNameOfDay first={index === 0}>
-              <StyledParagraphNameOfDay data-testid="dataOfPomodoro">
-                {changeDataToStringWithDayName(eAllDate)}
-              </StyledParagraphNameOfDay>
-            </StyledNameOfDay>
-            {data.map(
-              eData =>
-                eAllDate === eData.dateSerch && (
-                  <StyledMainWrapperOfSession key={eData.date.toString()}>
-                    <StyledInsideWrapperOfSession>
-                      <StyledNameOFSession>{eData.title}</StyledNameOFSession>
-                      <StyledLine />
-                    </StyledInsideWrapperOfSession>
-                    <StyledSessionNumber>{eData.pomodoro}</StyledSessionNumber>
-                    <StyledInsideWrapperOfsessionSecound>
-                      <StyledLine />
-                      <StyledTimeOfSession>
-                        {changeSecoundsToMinAndSec(eData.time)}
-                      </StyledTimeOfSession>
-                    </StyledInsideWrapperOfsessionSecound>
-                  </StyledMainWrapperOfSession>
-                ),
-            )}
-          </div>
-        ))}
+        {allDate.length === 0 ? (
+          <StyledWrapperForText>
+            <STyledInnerWHiteText>tutaj będą zapisywane wszyskie twoje sesje</STyledInnerWHiteText>
+          </StyledWrapperForText>
+        ) : (
+          allDate.map((eAllDate, index) => (
+            <div key={`id_${eAllDate}`}>
+              <StyledNameOfDay first={index === 0}>
+                <StyledParagraphNameOfDay data-testid="dataOfPomodoro">
+                  {changeDataToStringWithDayName(eAllDate)}
+                </StyledParagraphNameOfDay>
+              </StyledNameOfDay>
+              {data.map(
+                eData =>
+                  eAllDate === eData.dateSerch && (
+                    <StyledMainWrapperOfSession key={eData.date.toString()}>
+                      <StyledInsideWrapperOfSession>
+                        <StyledNameOFSession>{eData.title}</StyledNameOFSession>
+                        <StyledLine />
+                      </StyledInsideWrapperOfSession>
+                      <StyledSessionNumber>{eData.pomodoro}</StyledSessionNumber>
+                      <StyledInsideWrapperOfsessionSecound>
+                        <StyledLine />
+                        <StyledTimeOfSession>
+                          {changeSecoundsToMinAndSec(eData.time)}
+                        </StyledTimeOfSession>
+                      </StyledInsideWrapperOfsessionSecound>
+                    </StyledMainWrapperOfSession>
+                  ),
+              )}
+            </div>
+          ))
+        )}
       </>
     );
   }
+
   return <LoadingAnimation data-testid="patagraph" text="ładowanie" />;
 };
 

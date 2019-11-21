@@ -11,7 +11,7 @@ const StyledMainWrapper = styled.section`
 const StyleTopBar = styled.nav`
   z-index: 1000;
   width: 100%;
-  height: 8vh;
+  min-height: 60px;
   background: #6762ff;
   position: fixed;
   top: 0;

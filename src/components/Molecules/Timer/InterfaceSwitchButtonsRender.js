@@ -44,12 +44,13 @@ InterfaceSwitchButtonsRender.propTypes = {
   runApp: propTypes.func.isRequired,
   pauseApp: propTypes.func.isRequired,
   resetApp: propTypes.func.isRequired,
-  currentAction: propTypes.string.isRequired,
+  currentAction: propTypes.string,
   name: propTypes.string,
 };
 
 InterfaceSwitchButtonsRender.defaultProps = {
   name: '',
+  currentAction: 'reset',
 };
 
 export default InterfaceSwitchButtonsRender;

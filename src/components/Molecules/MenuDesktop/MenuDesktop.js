@@ -111,9 +111,9 @@ const MenuDesktop = () => {
         Hello, <br /> {user}
       </StyledUserName>
       <StyledListOfelement>
-        {menuConfig.map(element => (
-          <StyledElementOfList as={NavLink} to={element.link} activeclass="active">
-            {element.title}
+        {menuConfig.map(({ title, link }) => (
+          <StyledElementOfList as={NavLink} to={link} activeclass="active" key={title}>
+            {title}
           </StyledElementOfList>
         ))}
       </StyledListOfelement>

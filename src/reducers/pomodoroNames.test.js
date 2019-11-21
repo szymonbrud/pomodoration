@@ -1,7 +1,6 @@
 import { CURRENT_NAME } from 'actions/pomodoroNames';
 import reducer from './pomodoroNames';
 
-// TODO: change string DOWNLOAD_DATA to variable called DOWNLOAD_DATA
 describe('pomodoroNames reducer', () => {
   it('should return a initial state', () => {
     expect(reducer(undefined, {})).toEqual({

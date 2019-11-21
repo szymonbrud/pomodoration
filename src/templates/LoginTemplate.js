@@ -1,5 +1,3 @@
-// TODO: napisać testy do tego komponentu, myślę że się da, gdy będę manipulować mock fierbase
-
 import React, { useState } from 'react';
 import firebase from 'firebase';
 import 'firebase/auth';
@@ -8,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import LoginButton from 'components/LoginButton/LoginButton';
 import styled from 'styled-components';
 import LoadingAnimation from 'components/Molecules/LoadingAnimation/LoadingAnimation';
+import propTypes from 'prop-types';
 import { firebaseApp } from '../firebaseConfig';
 
 const StyledMainWrapper = styled.section`
@@ -47,7 +46,6 @@ const StyledWrapperPositionAnimation = styled.div`
   background: ${({ theme }) => theme.BGblue};
 `;
 
-// TODO: napiać prop types do tego, moge wyszukać w necie jakie prop types do tego pasują
 const LoginTemplate = ({ user }) => {
   const [isLoadingDuringAction, setIsLoadingDuringAction] = useState(false);
   const [isNOTFirstUserLogin, setIsNOTFirstUserLogin] = useState(null);
@@ -59,9 +57,9 @@ const LoginTemplate = ({ user }) => {
     }, 30000);
   };
   const LoginAction = () => {
+    authenticationAnimationStart();
     const provider = new firebase.auth.GoogleAuthProvider();
     firebaseApp.auth().signInWithRedirect(provider);
-    authenticationAnimationStart();
   };
 
   if (user) {
@@ -91,12 +89,13 @@ const LoginTemplate = ({ user }) => {
     <StyledMainWrapper>
       <H2 id="h2">Hello</H2>
       <H1>Pomodoro app</H1>
-      {!user && <LoginButton textInButton="zaloguj się przez google" action={LoginAction} />}
       <SmallTextBellowLoginButton>Więcej metod logowania już wkrótce</SmallTextBellowLoginButton>
-      {isLoadingDuringAction && (
+      {isLoadingDuringAction ? (
         <StyledWrapperPositionAnimation>
           <LoadingAnimation text="autntentykacja" />
         </StyledWrapperPositionAnimation>
+      ) : (
+        !user && <LoginButton textInButton="zaloguj się przez google" action={LoginAction} />
       )}
     </StyledMainWrapper>
   );

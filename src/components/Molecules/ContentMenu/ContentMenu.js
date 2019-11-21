@@ -24,6 +24,32 @@ const closeAnimation = keyframes`
   }
 `;
 
+const ManuStyledViews = {
+  closed: css`
+    transform: translateY(100%);
+  `,
+  opening: css`
+    animation-name: ${openAnimation};
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+  `,
+  closing: css`
+    animation-name: ${closeAnimation};
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+  `,
+  checkTheView(open) {
+    if (open === null) {
+      return this.closed;
+    }
+    if (open) {
+      return this.opening;
+    }
+
+    return this.closing;
+  },
+};
+
 const StyledMainWrapper = styled.div`
   position: fixed;
   top: 0;
@@ -33,26 +59,7 @@ const StyledMainWrapper = styled.div`
   background: ${({ theme }) => theme.blue};
   z-index: 5000;
 
-
-  //TODO: do somethink with this
-  ${({ isMenuOpen }) =>
-    isMenuOpen === null
-      ? css`
-          transform: translateY(100%);
-        `
-      : isMenuOpen
-      ? css`
-          animation-name: ${openAnimation};
-          animation-duration: 0.8s;
-          animation-fill-mode: forwards;
-        `
-      : css`
-          animation-name: ${closeAnimation};
-          animation-duration: 1.2s;
-          animation-fill-mode: forwards;
-        `}
-  }
-
+  ${({ isMenuOpen }) => ManuStyledViews.checkTheView(isMenuOpen)};
 `;
 
 const StyledListOfMenu = styled.ul`
@@ -69,7 +76,7 @@ const StyledListOfMenu = styled.ul`
 const StyledElementOfMenu = styled(Link)`
   color: white;
   font-size: 2.8rem;
-  margin-top: ${({ first }) => (first ? '20vh' : '7vh')};
+  margin-top: ${({ isfirst }) => (isfirst === 'true' ? '20vh' : '7vh')};
   text-decoration: none;
 `;
 
@@ -103,7 +110,6 @@ const ContentMenu = ({ isMenuOpen }) => {
       .signOut()
       .then(
         () => {
-          // TODO: zapisać sobie do zadań aby w przysłośći może podczas wylogowanywania dodać animacje oraz jakiś kompunikat że wylogowano poprawnie
           console.log('wylogowano poprawnie');
         },
         () => {
@@ -117,7 +123,11 @@ const ContentMenu = ({ isMenuOpen }) => {
       <StyledMainWrapper isMenuOpen={isMenuOpen}>
         <StyledListOfMenu>
           {menuConfig.map((element, index) => (
-            <StyledElementOfMenu to={element.link} first={index === 0}>
+            <StyledElementOfMenu
+              isfirst={index === 0 ? 'true' : 'false'}
+              to={element.link}
+              key={element.title}
+            >
               {element.title}
             </StyledElementOfMenu>
           ))}

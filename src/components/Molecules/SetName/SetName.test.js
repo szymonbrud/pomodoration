@@ -51,42 +51,4 @@ describe('SetName click option', () => {
 
     expect(tabOfPomodoroNames).toEqual(['coding', 'reading', 'slepping']);
   });
-
-  // TODO: repair this test
-  // it('add new pomodoroName by SetNewNameBottomPanel component', async () => {
-  //   const store = storeToTests({ pomodoroNames });
-  //   store.dispatch(changeCurrentNamePomodoro('reading', ['coding', 'slepping']));
-  //   const { getByTestId, getByText, findByTestId, getAllByTestId } = render(
-  //     <Provider store={store}>
-  //       <SetName />
-  //     </Provider>,
-  //   );
-
-  //   const input = getByTestId('input');
-  //   fireEvent.change(input, { target: { value: 'programming' } });
-
-  //   const doneButton = getByText('done');
-  //   fireEvent.click(doneButton);
-
-  //   const wrrper = getByText('co dziś robimy?');
-  //   fireEvent.click(wrrper);
-
-  //   const tabOfPOmodorNames = [];
-
-  //   const allPomoros = getAllByTestId('pomodoroNamesElement');
-  //   allPomoros.forEach(e => {
-  //     tabOfPOmodorNames.push(e.textContent);
-  //   });
-
-  //   let storeSome;
-
-  //   setTimeout(() => {
-  //     storeSome = store.getState().pomodoroNames.nameOfLastPomodoros;
-  //   });
-
-  //   // const SetNewNameBottomPanel = await waitForElement(() => findByTestId('input'));
-  //   // console.log(input);
-
-  //   expect(storeSome).toBe(['reading', 'coding', 'slepping']);
-  // });
 });

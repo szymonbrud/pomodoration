@@ -40,60 +40,36 @@
     -->
 </body>
 <script>
+  
   //TODO: clear it
-  // window.addEventListener('load', (e) => {
-    // hide our user interface that shows our A2HS button
-    // btnAdd.style.display = 'none';
-    // Show the prompt
+ 
+  // let deferredPrompt;
+  // window.addEventListener('beforeinstallprompt', (e) => {
+  //   // Stash the event so it can be triggered later.
+  //   deferredPrompt = e;
+  //   console.log(deferredPrompt);
 
-
-    
-
-    // });
-    // console.log(deferredPrompt);
-
-
-
-    // deferredPrompt.prompt();
-    // // // Wait for the user to respond to the prompt
-    // deferredPrompt.userChoice
-    //   .then((choiceResult) => {
-    //     if (choiceResult.outcome === 'accepted') {
-    //       console.log('User accepted the A2HS prompt');
-    //     } else {
-    //       console.log('User dismissed the A2HS prompt');
-    //     }
-    //     deferredPrompt = null;
-    //   });
+  //   if (deferredPrompt !== undefined) {
+  //     deferredPrompt.prompt();
+  //     // Wait for the user to respond to the prompt
+  //     deferredPrompt.userChoice
+  //       .then((choiceResult) => {
+  //         if (choiceResult.outcome === 'accepted') {
+  //           console.log('User accepted the A2HS prompt');
+  //         } else {
+  //           console.log('User dismissed the A2HS prompt');
+  //         }
+  //         deferredPrompt = null;
+  //       });
+  //   }
   // });
 
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
-    console.log(deferredPrompt);
-
-    if (deferredPrompt !== undefined) {
-      deferredPrompt.prompt();
-      // Wait for the user to respond to the prompt
-      deferredPrompt.userChoice
-        .then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
-          } else {
-            console.log('User dismissed the A2HS prompt');
-          }
-          deferredPrompt = null;
-        });
-    }
-  });
-
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', async () => {
-      navigator.serviceWorker.register('%PUBLIC_URL%/firebase-messaging-sw.js').then(registration => {
-        firebase.messaging().useServiceWorker(registration);
-      });
-    });
-  }
+  // if ('serviceWorker' in navigator) {
+  //     window.addEventListener('load', async () => {
+  //       navigator.serviceWorker.register('%PUBLIC_URL%/firebase-messaging-sw.js').then(registration => {
+  //         firebase.messaging().useServiceWorker(registration);
+  //       });
+  //     });
+  //   }
 </script>
 </html>

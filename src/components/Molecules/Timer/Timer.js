@@ -74,5 +74,3 @@ Timer.defaultProps = {
 };
 
 export default Timer;
-
-// TODO: pozmieniać strukure plików tego bo to masakra

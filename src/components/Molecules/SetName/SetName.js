@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
 import media from 'assets/styles/media';
-import { changeSetNameBottomPanel } from 'actions/visibleOfComponents';
+import { changeSetNameBottomPanel, changeNameOfPomdoroListOpen } from 'actions/visibleOfComponents';
 
 const StyledMainWrapper = styled.div`
   width: 50%;
@@ -59,7 +59,7 @@ const animationCome = keyframes`
 `;
 
 const StyledMainSelecter = styled.div`
-  z-index: 5500;
+  z-index: 9100;
   position: absolute;
   width: 100%;
   transform: translateY(calc(50% - 30px));
@@ -75,19 +75,6 @@ const StyledMainSelecter = styled.div`
       display: block;
       animation: ${animationCome} 0.3s ease-in-out;
     `}
-`;
-
-const StyledCloseWrapper = styled.div`
-  display: ${({ open }) => !open && 'none'};
-  z-index: 5000;
-  width: 100%;
-  height: 100vh;
-  background: none;
-  position: fixed;
-
-  ${media.desktop`
-    height: 70vh;
-  `}
 `;
 
 const StyledSmallInformation = styled.p`
@@ -123,17 +110,17 @@ const StyledAddNewNameP = styled.p`
 const SetName = () => {
   const dispatch = useDispatch();
   const pomodoroNames = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);
-  const [open, setOpen] = useState(false);
+  const isPomodoroListOpen = useSelector(
+    state => state.visibleOfComponents.isNameOfPomodoroListOpen,
+  );
 
   const changeOpen = () => {
-    setOpen(!open);
+    dispatch(changeNameOfPomdoroListOpen(!isPomodoroListOpen));
   };
 
   const OpenBarAndCloseList = () => {
     dispatch(changeSetNameBottomPanel(true));
-
-    setOpen(!open);
-    // setOpenDownBar(true);
+    changeOpen();
   };
 
   const setOptionFromList = name => {
@@ -148,7 +135,7 @@ const SetName = () => {
     <>
       <StyledMainWrapper>
         <StyledMainRoller onClick={() => changeOpen()}>co dziś robimy?</StyledMainRoller>
-        <StyledMainSelecter open={open} data-testid="listOfPomodoros">
+        <StyledMainSelecter open={isPomodoroListOpen} data-testid="listOfPomodoros">
           <StyledSmallInformation>ostatnie:</StyledSmallInformation>
           {pomodoroNames.map(e => (
             <OneElementOfList
@@ -163,7 +150,6 @@ const SetName = () => {
             <StyledAddNewNameP>+dodaj nazwę</StyledAddNewNameP>
           </StyledOneOption>
         </StyledMainSelecter>
-        <StyledCloseWrapper open={open} onClick={() => changeOpen()} />
       </StyledMainWrapper>
     </>
   );

@@ -16,7 +16,6 @@ const useTimer = (startTime, status) => {
   const [actionTimer, setActionsTimer] = useState();
   const dispatch = useDispatch();
   const nameOfPomodoroState = useSelector(state => state.pomodoroNames.currentPomodoroName);
-  const historyOfPomodoroAll = useSelector(state => state.historyOfPomodoro.pomodoroSessions);
 
   if (status === 'reset' || status === 'pause') {
     dispatch(changeLoadingDataStatus(false));

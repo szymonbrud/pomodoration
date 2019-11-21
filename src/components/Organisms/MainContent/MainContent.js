@@ -9,6 +9,7 @@ import downloadNamesOfLastPomodoros from 'actions/downloadData/downloadNamesOfLa
 import ShowHistoryOfTimeButton from 'components/Molecules/ShowHistoryOfTimeButton/ShowHistoryOfTimeButton';
 import media from 'assets/styles/media';
 import MenuDesktop from 'components/Molecules/MenuDesktop/MenuDesktop';
+import HideTheSetNamePomodoro from 'components/Molecules/HideTheSetNamePomodoro/HideTheSetNamePomodoro';
 
 const StyledMainWrapper = styled.div`
   position: relative;
@@ -44,6 +45,7 @@ const MainContent = () => {
         </TimerWrapper>
         <ShowHistoryOfTimeButton />
         <MenuDesktop />
+        <HideTheSetNamePomodoro />
       </StyledMainWrapper>
     </>
   );

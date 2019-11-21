@@ -4,13 +4,14 @@ import { render, fireEvent } from '@testing-library/react';
 import pomodoroNames from 'reducers/pomodoroNames';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
 import { Provider } from 'react-redux';
+import visibleOfComponents from 'reducers/visibleOfComponents';
 import SetName from './SetName';
 
 jest.mock('components/Molecules/Timer/Requests');
 
 describe('SetName click option', () => {
   it('check the list of pomodoroNames', () => {
-    const store = storeToTests({ pomodoroNames });
+    const store = storeToTests({ pomodoroNames, visibleOfComponents });
     store.dispatch(changeCurrentNamePomodoro('reading', ['coding', 'slepping']));
     const { getAllByTestId } = render(
       <Provider store={store}>
@@ -30,7 +31,7 @@ describe('SetName click option', () => {
   });
 
   it('check the list of pomodoro when click one of elements', () => {
-    const store = storeToTests({ pomodoroNames });
+    const store = storeToTests({ pomodoroNames, visibleOfComponents });
     store.dispatch(changeCurrentNamePomodoro('reading', ['coding', 'slepping']));
     const { getAllByTestId, getByText } = render(
       <Provider store={store}>

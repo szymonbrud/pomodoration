@@ -8,7 +8,7 @@ const TimerButton = styled.button`
   background: linear-gradient(90deg, #6762ff 0%, rgba(255, 255, 255, 0) 100%), #ff5362;
   border-radius: 10px;
   border: none;
-  font-size: 2.5rem;
+  font-size: 2.4rem;
 
   ${({ red }) =>
     red &&
@@ -20,6 +20,13 @@ const TimerButton = styled.button`
     blue &&
     css`
       background: ${({ theme }) => theme.blue};
+    `}
+
+  ${({ big }) =>
+    big &&
+    css`
+      width: 50%;
+      font-size: 1.9rem;
     `}
 `;
 

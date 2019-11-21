@@ -18,8 +18,8 @@ const InterfaceSwitchButtonsRender = ({ runApp, pauseApp, resetApp, currentActio
     case 'pause':
       return (
         <>
-          <TimerButton red onClick={() => resetApp('reset')} data-test="pauseTimerButton">
-            reset
+          <TimerButton red big onClick={() => resetApp('reset')} data-test="pauseTimerButton">
+            zakończ i zapisz
           </TimerButton>
           <TimerButton blue onClick={() => runApp()}>
             wznow

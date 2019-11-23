@@ -1,8 +1,8 @@
 import reducer from 'reducers/pomodoroNames';
-import { storeToTests } from 'Utils';
+import { storeToTests } from 'Helpers';
 import { changeCurrentNamePomodoro, onlySetCurrentName } from 'actions/pomodoroNames';
 
-jest.mock('components/Molecules/Timer/Requests');
+jest.mock('requests/Requests');
 
 describe('test reducers and action copatibility', () => {
   it('Should retrun correct data of state, when run onlySetCurrentName action', () => {

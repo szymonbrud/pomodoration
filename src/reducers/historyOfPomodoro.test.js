@@ -3,7 +3,7 @@ import {
   DOWNLOAD_DATA,
   GET_DATE_FROM_DATA_AND_SORT,
 } from 'actions/downloadSessionsFromDatabase';
-import { historyOfPomodorosDataFromDatabase } from 'Utils/dataToTests';
+import { historyOfPomodorosDataFromDatabase } from 'Helpers/dataToTests';
 import reducer from './historyOfPomodoro';
 
 describe('historyOfPomodoro', () => {

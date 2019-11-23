@@ -1,4 +1,4 @@
-import { saveMyPomodorosNamesToDatabase } from 'components/Molecules/Timer/Requests';
+import { saveMyPomodorosNamesToDatabase } from 'requests/Requests';
 
 export const CURRENT_NAME = 'CURRENT_NAME';
 export const DOWNLOAD_DATA_POMODORO_NAMES = 'DOWNLOAD_DATA_POMODORO_NAMES';

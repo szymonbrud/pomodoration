@@ -5,7 +5,7 @@ import {
   onlySetCurrentName,
 } from './pomodoroNames';
 
-jest.mock('components/Molecules/Timer/Requests');
+jest.mock('requests/Requests');
 
 describe('pomodoroNames', () => {
   describe('changeCurrentNamePomodoro', () => {

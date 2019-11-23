@@ -1,12 +1,12 @@
 import historyOfPomodoro from 'reducers/historyOfPomodoro';
-import { historyOfPomodorosDataFromDatabase } from 'Utils/dataToTests';
+import { historyOfPomodorosDataFromDatabase } from 'Helpers/dataToTests';
 import {
   getDateFromDataAndSort,
   downloadPomodoroSessions,
   downloadData,
 } from 'actions/downloadSessionsFromDatabase';
 
-import { storeToTests } from 'Utils';
+import { storeToTests } from 'Helpers';
 
 const store = storeToTests({ historyOfPomodoro });
 describe('test reducers and action copatibility', () => {

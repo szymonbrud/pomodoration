@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from 'Utils';
+import { findByTestAtrr } from 'Helpers';
 import InterfaceSwitchButtonsRender from './InterfaceSwitchButtonsRender';
 
 describe('InterfaceSwitchButtonsRender', () => {

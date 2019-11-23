@@ -1,4 +1,4 @@
-import { historyOfPomodorosDataFromDatabase } from 'Utils/dataToTests';
+import { historyOfPomodorosDataFromDatabase } from 'Helpers/dataToTests';
 import {
   downloadPomodoroSessions,
   DOWNLOAD_POMODORO_SESSIONS,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { storeToTests } from 'Utils';
+import { storeToTests } from 'Helpers';
 import { render, fireEvent } from '@testing-library/react';
 import pomodoroNames from 'reducers/pomodoroNames';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import visibleOfComponents from 'reducers/visibleOfComponents';
 import SetName from './SetName';
 
-jest.mock('components/Molecules/Timer/Requests');
+jest.mock('requests/Requests');
 
 describe('SetName click option', () => {
   it('check the list of pomodoroNames', () => {

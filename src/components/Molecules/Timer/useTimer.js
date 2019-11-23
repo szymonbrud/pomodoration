@@ -9,7 +9,7 @@ import {
   SendPauseAction,
   SendResetAction,
   saveMyPomodoroToDatabase,
-} from './Requests';
+} from 'requests/Requests';
 
 const useTimer = (startTime, status) => {
   const [currentTime, setcurrentTime] = useState();

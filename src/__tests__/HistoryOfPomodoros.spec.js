@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, cleanup, waitForElement } from '@testing-library/react';
-import { storeToTests } from 'Utils';
+import { storeToTests } from 'Helpers';
 import pomodoroNames from 'reducers/pomodoroNames';
 import historyOfPomodoro from 'reducers/historyOfPomodoro';
 import { Provider } from 'react-redux';

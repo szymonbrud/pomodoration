@@ -12,10 +12,6 @@ const TimerWrapper = ({ children }) => {
   const [getNewState, setGetNewState] = useState(false);
   const dispatch = useDispatch();
 
-  // nie wiem po co to ale jak by coś nie działało to mażna to odblokować
-  // const pomodorosAllLast = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);
-
-  // to daje nam to że jeżeli wyłączymy i włączymy aplikacje to mamy pewność przeładowania
   let loading = false;
 
   document.addEventListener(

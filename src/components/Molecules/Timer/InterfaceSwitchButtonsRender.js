@@ -5,38 +5,46 @@ import SetName from 'components/Molecules/SetName/SetName';
 import propTypes from 'prop-types';
 
 const InterfaceSwitchButtonsRender = ({ runApp, pauseApp, resetApp, currentAction, name }) => {
+  const InterfaceViews = {
+    runView: (
+      <>
+        <TimerButton blue onClick={() => pauseApp()} data-test="runTimerButton">
+          pause
+        </TimerButton>
+        <NameOfPomodoro name={name} />
+      </>
+    ),
+
+    pauseView: (
+      <>
+        <TimerButton red big onClick={() => resetApp('reset')} data-test="pauseTimerButton">
+          zakończ i zapisz
+        </TimerButton>
+        <TimerButton blue onClick={() => runApp()}>
+          wznow
+        </TimerButton>
+        <NameOfPomodoro name={name} />
+      </>
+    ),
+
+    resetView: (
+      <>
+        <SetName />
+        <TimerButton onClick={() => runApp()} data-test="resetOrNothingTimerButton">
+          start
+        </TimerButton>
+        <NameOfPomodoro name={name} />
+      </>
+    ),
+  };
+
   switch (currentAction) {
     case 'run':
-      return (
-        <>
-          <TimerButton blue onClick={() => pauseApp()} data-test="runTimerButton">
-            pause
-          </TimerButton>
-          <NameOfPomodoro name={name} />
-        </>
-      );
+      return InterfaceViews.runView;
     case 'pause':
-      return (
-        <>
-          <TimerButton red big onClick={() => resetApp('reset')} data-test="pauseTimerButton">
-            zakończ i zapisz
-          </TimerButton>
-          <TimerButton blue onClick={() => runApp()}>
-            wznow
-          </TimerButton>
-          <NameOfPomodoro name={name} />
-        </>
-      );
+      return InterfaceViews.pauseView;
     default:
-      return (
-        <>
-          <SetName />
-          <TimerButton onClick={() => runApp()} data-test="resetOrNothingTimerButton">
-            start
-          </TimerButton>
-          <NameOfPomodoro name={name} />
-        </>
-      );
+      return InterfaceViews.resetView;
   }
 };
 

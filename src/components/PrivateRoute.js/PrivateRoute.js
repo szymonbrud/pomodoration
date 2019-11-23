@@ -10,7 +10,6 @@ const WrapperForLoading = styled.div`
   height: 100vh;
 `;
 
-// TODO: #TEST nauczyć się testować redirect bo pewnie jest cos takiego
 const PrivateRoute = ({ component: RouteComponent }) => {
   const { currentUser } = useContext(AuthContext);
 

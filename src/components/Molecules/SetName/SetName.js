@@ -129,8 +129,6 @@ const SetName = () => {
     changeOpen();
   };
 
-  // TODO: # TEST wywalić testy tego pliku i dodać je jako integracyjne
-
   return (
     <>
       <StyledMainWrapper>

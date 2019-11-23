@@ -1,5 +1,5 @@
 import historyOfPomodoro from 'reducers/historyOfPomodoro';
-import { historyOfPomodorosDataFromDatabase } from 'Helpers/dataToTests';
+import historyOfPomodorosDataFromDatabase from '__mocks__/historyOfPomodorosDataFromDatabase';
 import {
   getDateFromDataAndSort,
   downloadPomodoroSessions,

@@ -111,8 +111,6 @@ const StyledButton = styled.button`
   font-size: 2rem;
 `;
 
-// TODO: #TEST ten plik będzie testowany integracyjne razem z drguim
-
 const SetNewNameBottomPanel = () => {
   const dispatch = useDispatch();
   const nameOfLastPomodoros = useSelector(state => state.pomodoroNames.nameOfLastPomodoros);

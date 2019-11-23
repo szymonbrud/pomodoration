@@ -8,7 +8,7 @@ import ShowHistoryOfTimeButton from 'components/Molecules/ShowHistoryOfTimeButto
 
 jest.mock('actions/downloadData/downloadSessionsFromFirebase');
 
-// TODO: #TEST have got a two bugs in console about bad in test or idk
+// TODO: #TEST have got a bug in console about bad
 
 describe('ShowHistoryOfTimeButton', () => {
   describe('Position of HistoryPomodoro', () => {

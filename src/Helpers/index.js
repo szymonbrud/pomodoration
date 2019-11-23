@@ -8,6 +8,7 @@ export const findByTestAtrr = (component, attr) => {
 };
 
 export const checkProps = (component, expectedProps) => {
+  // eslint-disable-next-line
   const propsErr = checkPropTypes(component.propTypes, expectedProps, 'props', component.name);
   return propsErr;
 };

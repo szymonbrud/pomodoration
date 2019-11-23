@@ -5,7 +5,7 @@ import pomodoroNames from 'reducers/pomodoroNames';
 import { changeCurrentNamePomodoro } from 'actions/pomodoroNames';
 import { Provider } from 'react-redux';
 import visibleOfComponents from 'reducers/visibleOfComponents';
-import SetName from './SetName';
+import SetName from 'components/Molecules/SetName/SetName';
 
 jest.mock('requests/Requests');
 

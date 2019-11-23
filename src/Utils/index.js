@@ -26,4 +26,4 @@ export const storeToTests = reducers => {
   return store;
 };
 
-// TODO: zmienić nazwę folderu na testHelpers myślę że będzie lepiej pasować. Ale zanim to to spawdzić w necie czy to napewno są chelery
+// TODO: #ZMIANA STRUKTURY zmienić nazwę folderu na testHelpers myślę że będzie lepiej pasować. Ale zanim to to spawdzić w necie czy to napewno są chelery

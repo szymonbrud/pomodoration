@@ -89,7 +89,6 @@ const LoginTemplate = ({ user }) => {
     <StyledMainWrapper>
       <H2 id="h2">Hello</H2>
       <H1>Pomodoro app</H1>
-      <SmallTextBellowLoginButton>Więcej metod logowania już wkrótce</SmallTextBellowLoginButton>
       {isLoadingDuringAction ? (
         <StyledWrapperPositionAnimation>
           <LoadingAnimation text="autntentykacja" />
@@ -97,6 +96,7 @@ const LoginTemplate = ({ user }) => {
       ) : (
         !user && <LoginButton textInButton="zaloguj się przez google" action={LoginAction} />
       )}
+      <SmallTextBellowLoginButton>Więcej metod logowania już wkrótce</SmallTextBellowLoginButton>
     </StyledMainWrapper>
   );
 };

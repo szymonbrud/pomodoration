@@ -22,7 +22,7 @@ const StyledMainWrapper = styled.div`
 
   ${media.desktop`
     width: 35vw;
-    margin-left: 15%;
+    margin-left: 19.5vw;
     background: #EEEFFF;
     max-height: 25vw;
     margin-top: 10vh;

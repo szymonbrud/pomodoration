@@ -4,6 +4,7 @@ import beHappyAfterFinishWork from 'assets/images/beHappyAfterFinishWork.svg';
 import checkTheList from 'assets/images/checkTheList.svg';
 import working from 'assets/images/working.svg';
 import arrow from 'assets/icons/arrow.svg';
+import realTimeDatabase from 'assets/images/realTimeDatabase.svg';
 import { Redirect } from 'react-router-dom';
 import media from 'assets/styles/media';
 import useFirstLoginAnimation from './useFirstLoginAnimation';
@@ -21,7 +22,7 @@ const StyledMainTemplate = styled.div`
 `;
 
 const StyledTopTable = styled.div`
-  width: 180px;
+  width: 200px;
   height: 50px;
   margin: 0 auto;
   display: flex;
@@ -34,7 +35,7 @@ const StyledTopTable = styled.div`
 `;
 
 const StyledOneTable = styled.div`
-  width: 26%;
+  width: 21%;
   border-radius: 100px;
   height: 9px;
   background: rgba(255, 255, 255, 0.6);
@@ -139,12 +140,16 @@ const tabOfTextAndImage = [
     text: 'osiągaj cele',
     image: beHappyAfterFinishWork,
   },
+  {
+    text: 'Kożystaj na każym urządzeniu, dzięki danym w chmurze',
+    image: realTimeDatabase,
+  },
 ];
 
 const FirstLoginTemplate = () => {
   const { currentSection, nextSection } = useFirstLoginAnimation();
 
-  if (currentSection === 3) {
+  if (currentSection === 4) {
     return <Redirect to="/timer" />;
   }
 
@@ -154,6 +159,7 @@ const FirstLoginTemplate = () => {
         <StyledOneTable isActive />
         <StyledOneTable isActive={currentSection >= 1} />
         <StyledOneTable isActive={currentSection >= 2} />
+        <StyledOneTable isActive={currentSection >= 3} />
       </StyledTopTable>
       {tabOfTextAndImage.map((element, index) => (
         <StyledWrapperForOneSection currentSection={currentSection} index={index}>

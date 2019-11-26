@@ -3,7 +3,7 @@
 This is an app which help us with be more productive. The application is based on react, redux, styled-components, firebase.
 I created this application to improve my skills: test writing, TDD, react hooks, firebase, user authentication, PWA, react patterns.
 
-**Visit my app here:** pomodoration.pl
+**Visit my app here:** [pomodoration.pl](https://pomodoration.pl/) 
 
 ## How to run on localhost?
 

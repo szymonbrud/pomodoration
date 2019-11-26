@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import LoginButton from 'components/LoginButton/LoginButton';
 import styled from 'styled-components';
 import LoadingAnimation from 'components/Molecules/LoadingAnimation/LoadingAnimation';
-import propTypes from 'prop-types';
 import { firebaseApp } from '../firebaseConfig';
 
 const StyledMainWrapper = styled.section`
@@ -88,7 +87,7 @@ const LoginTemplate = ({ user }) => {
   return (
     <StyledMainWrapper>
       <H2 id="h2">Hello</H2>
-      <H1>Pomodoro app</H1>
+      <H1>Pomodoration</H1>
       {isLoadingDuringAction ? (
         <StyledWrapperPositionAnimation>
           <LoadingAnimation text="uwierzytelnianie" />

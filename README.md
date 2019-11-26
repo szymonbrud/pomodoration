@@ -11,10 +11,10 @@ I created this application to improve my skills: test writing, TDD, react hooks,
 2. create a new project on firebase
 3. create a .env file
 4. save to .env file: 
-  NODE_PATH=src
-  REACT_APP_API_KEY=yourApiKey
-  REACT_APP_DATABASE_URL=yourdatabaseURL
-  REACT_APP_PROJECT_ID=projectId
-  REACT_APP_MESSAGING_SENDER_ID=yourMessagingId
-  REACT_APP_APP_ID=yourAppId
+  NODE_PATH=src  
+  REACT_APP_API_KEY=yourApiKey  
+  REACT_APP_DATABASE_URL=yourdatabaseURL  
+  REACT_APP_PROJECT_ID=projectId  
+  REACT_APP_MESSAGING_SENDER_ID=yourMessagingId  
+  REACT_APP_APP_ID=yourAppId  
 5. `npm run start`

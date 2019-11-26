@@ -10,7 +10,7 @@ I created this application to improve my skills: test writing, TDD, react hooks,
 1. `npm install`
 2. create a new project on firebase
 3. create a .env file
-4. save to .env file: 
+4. save to .env file:  
   NODE_PATH=src  
   REACT_APP_API_KEY=yourApiKey  
   REACT_APP_DATABASE_URL=yourdatabaseURL  

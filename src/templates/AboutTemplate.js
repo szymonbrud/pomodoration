@@ -93,27 +93,54 @@ const StyledContentListItemArt = styled.li`
   }
 `;
 
+const StyledBoldText = styled.span`
+  font-weight: bold;
+`;
+
+const StyledLinkTo = styled.a`
+  color: #6762ff;
+`;
+
 const AboutInformationToMap = [
   {
     type: 'list',
-    title: 'co planuje wprowadzić w przyszłości',
+    title: 'Co planuję wprowadzić w przyszłości',
     content: [
-      'powiadomienia, sygnał dzwiękowy po upływie czasu',
-      'zmiana domyślnie ustawionego czasu',
+      'powiadomienia, alarm po upływie wyznaczonego czasu',
+      'zmiana domyślnego czasu',
       'więcej metod logowania się do aplikacji',
+      'ciemny motyw aplikacji',
     ],
   },
   {
     type: 'article',
-    title: 'dlaczego ta aplikacja powstała',
+    title: 'Dlaczego stworzyłem tą aplikację',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac magna quam. Vivamus ac purus vel eros ultrices placerat eu non felis. Phasellus ullamcorper diam dapibus, viverra nunc et, fermentum sem. Duis dignissim condimentum porta.',
+      'Moim głównym celem było aby pisząc tą aplikację nauczyć się jak najwięcej. Głównie celowałem w naukę (testów, TDD, react hooks, firebase, uwierzytelniania użytkowników, PWA, wzorców projektowych). Oczywiście przy tworzeniu aplikacji nauczyłem się znacznie więcej jestem z tego powodu bardzo zadowolony.',
   },
   {
     type: 'article',
-    title: 'kim jestem',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac magna quam. Vivamus ac purus vel eros ultrices placerat eu non felis. Phasellus ullamcorper diam dapibus, viverra nunc et, fermentum sem. Duis dignissim condimentum porta.',
+    title: 'Kim jestem?',
+    content: (
+      <>
+        Mam 16 i moją pasją jest programowanie. Cały czas chcę się uczyć, i poprawiać to co już
+        umiem.
+        <br />
+        <br />
+        <StyledBoldText>Odwiedź mnie na linkedin: </StyledBoldText>
+        <StyledLinkTo href="https://www.linkedin.com/in/szymon-brud-119253189" target="blank">
+          linkedin-Szymon Brud
+        </StyledLinkTo>
+        <br />
+        <StyledBoldText>Zobacz projekt na github: </StyledBoldText>
+        <StyledLinkTo href="https://github.com/szymonqqaz" target="blank">
+          https://github.com/szymonqqaz
+        </StyledLinkTo>
+        <br />
+        <br />
+        Jestem otwarty na współpracę.
+      </>
+    ),
   },
   {
     type: 'article',

@@ -91,7 +91,7 @@ const LoginTemplate = ({ user }) => {
       <H1>Pomodoro app</H1>
       {isLoadingDuringAction ? (
         <StyledWrapperPositionAnimation>
-          <LoadingAnimation text="autntentykacja" />
+          <LoadingAnimation text="uwierzytelnianie" />
         </StyledWrapperPositionAnimation>
       ) : (
         !user && <LoginButton textInButton="zaloguj się przez google" action={LoginAction} />

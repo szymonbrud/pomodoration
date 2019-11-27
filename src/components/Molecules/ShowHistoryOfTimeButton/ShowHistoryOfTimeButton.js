@@ -16,7 +16,7 @@ const StyledWrapperLine = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  z-index: 1000;
+  z-index: 9300;
   transition: ${({ animateSliding }) => animateSliding && 'transform .3s'};
 
   ${media.desktop`

@@ -12,7 +12,7 @@ const StyledWrapperButton = styled.button`
   position: absolute;
   right: 5px;
   top: 5px;
-  z-index: 6000;
+  z-index: 9500;
 `;
 
 const StyledLine = styled.div`

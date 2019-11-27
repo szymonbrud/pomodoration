@@ -7,6 +7,7 @@ import media from 'assets/styles/media';
 const StyledMainWrapper = styled.div`
   border-radius: 15px 15px 0 0;
   position: fixed;
+  z-index: 9200;
   top: 20vh;
   left: 0;
   width: 100%;

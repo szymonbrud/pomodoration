@@ -57,7 +57,7 @@ const StyledMainWrapper = styled.div`
   height: 100vh;
   width: 100%;
   background: ${({ theme }) => theme.blue};
-  z-index: 5000;
+  z-index: 9400;
 
   ${({ isMenuOpen }) => ManuStyledViews.checkTheView(isMenuOpen)};
 `;

@@ -12,7 +12,7 @@ const StyledMainPossitionWrapper = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 5000;
+  z-index: 9200;
 
   ${media.desktop`
     bottom: unset;

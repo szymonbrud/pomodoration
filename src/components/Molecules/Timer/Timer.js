@@ -35,6 +35,7 @@ const WrapperButtons = styled.div`
   display: flex;
   margin-top: 10vh;
   justify-content: space-around;
+  z-index: 9100;
 
   ${media.desktop`
     position: absolute;

@@ -8,6 +8,7 @@ import realTimeDatabase from 'assets/images/realTimeDatabase.svg';
 import { Redirect } from 'react-router-dom';
 import media from 'assets/styles/media';
 import useFirstLoginAnimation from './useFirstLoginAnimation';
+import MainTemplate from './MainTemplate';
 
 const StyledMainTemplate = styled.div`
   width: 100%;
@@ -154,23 +155,25 @@ const FirstLoginTemplate = () => {
   }
 
   return (
-    <StyledMainTemplate>
-      <StyledTopTable>
-        <StyledOneTable isActive />
-        <StyledOneTable isActive={currentSection >= 1} />
-        <StyledOneTable isActive={currentSection >= 2} />
-        <StyledOneTable isActive={currentSection >= 3} />
-      </StyledTopTable>
-      {tabOfTextAndImage.map((element, index) => (
-        <StyledWrapperForOneSection currentSection={currentSection} index={index}>
-          <StyledImageForOneSection src={element.image} />
-          <StyledTextForOneSection>{element.text}</StyledTextForOneSection>
-        </StyledWrapperForOneSection>
-      ))}
-      <StyledNextButton onClick={nextSection}>
-        <StyledIcon src={arrow} />
-      </StyledNextButton>
-    </StyledMainTemplate>
+    <MainTemplate>
+      <StyledMainTemplate>
+        <StyledTopTable>
+          <StyledOneTable isActive />
+          <StyledOneTable isActive={currentSection >= 1} />
+          <StyledOneTable isActive={currentSection >= 2} />
+          <StyledOneTable isActive={currentSection >= 3} />
+        </StyledTopTable>
+        {tabOfTextAndImage.map((element, index) => (
+          <StyledWrapperForOneSection currentSection={currentSection} index={index}>
+            <StyledImageForOneSection src={element.image} />
+            <StyledTextForOneSection>{element.text}</StyledTextForOneSection>
+          </StyledWrapperForOneSection>
+        ))}
+        <StyledNextButton onClick={nextSection}>
+          <StyledIcon src={arrow} />
+        </StyledNextButton>
+      </StyledMainTemplate>
+    </MainTemplate>
   );
 };
 

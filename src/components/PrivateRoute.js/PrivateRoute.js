@@ -22,7 +22,7 @@ const PrivateRoute = ({ component: RouteComponent }) => {
 
   return (
     <WrapperForLoading>
-      <LoadingAnimation text="autoryzacja" />
+      <LoadingAnimation text="uwierzytelnianie" />
     </WrapperForLoading>
   );
 };

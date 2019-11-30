@@ -9,7 +9,7 @@ const InterfaceSwitchButtonsRender = ({ runApp, pauseApp, resetApp, currentActio
     runView: (
       <>
         <TimerButton blue onClick={() => pauseApp()} data-test="runTimerButton">
-          pause
+          zatrzymaj
         </TimerButton>
         <NameOfPomodoro name={name} />
       </>
@@ -21,7 +21,7 @@ const InterfaceSwitchButtonsRender = ({ runApp, pauseApp, resetApp, currentActio
           zakończ i zapisz
         </TimerButton>
         <TimerButton blue onClick={() => runApp()}>
-          wznow
+          wznów
         </TimerButton>
         <NameOfPomodoro name={name} />
       </>

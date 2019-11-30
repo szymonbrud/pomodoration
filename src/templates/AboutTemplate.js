@@ -110,13 +110,14 @@ const AboutInformationToMap = [
       'zmiana domyślnego czasu',
       'więcej metod logowania się do aplikacji',
       'ciemny motyw aplikacji',
+      'wprowadzenie do korzystania z aplikacji',
     ],
   },
   {
     type: 'article',
     title: 'Dlaczego stworzyłem tą aplikację',
     content:
-      'Moim głównym celem było aby pisząc tą aplikację nauczyć się jak najwięcej. Głównie celowałem w naukę (testów, TDD, react hooks, firebase, uwierzytelniania użytkowników, PWA, wzorców projektowych). Oczywiście przy tworzeniu aplikacji nauczyłem się znacznie więcej jestem z tego powodu bardzo zadowolony.',
+      'Moim głównym celem było aby pisząc tą aplikację nauczyć się jak najwięcej. Głównie celowałem w naukę (testów, TDD, react hooks, firebase, uwierzytelniania użytkowników, PWA, wzorców w react). Ogólnie jestem dość zadowolony z aktualnej wersji aplikacji, i mam zamiar dalej ją rozwijać.',
   },
   {
     type: 'article',
@@ -134,6 +135,11 @@ const AboutInformationToMap = [
         <br />
         <StyledBoldText>Zobacz projekt na github: </StyledBoldText>
         <StyledLinkTo href="https://github.com/szymonqqaz" target="blank">
+          https://github.com/szymonqqaz
+        </StyledLinkTo>
+        <br />
+        <StyledBoldText>Możesz też odwiedzić mnie na facebooku: </StyledBoldText>
+        <StyledLinkTo href="https://www.facebook.com/szymon.brud.94" target="blank">
           https://github.com/szymonqqaz
         </StyledLinkTo>
         <br />

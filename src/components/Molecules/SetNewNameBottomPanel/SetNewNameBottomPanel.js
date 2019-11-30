@@ -12,7 +12,7 @@ const StyledMainPossitionWrapper = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 9200;
+  z-index: 9400;
 
   ${media.desktop`
     bottom: unset;
@@ -23,6 +23,7 @@ const StyledMainPossitionWrapper = styled.div`
     display: ${({ open }) => (open ? 'flex' : 'none')};
     align-items: center;
     justify-content: center;
+    z-index: 9200;
   `}
 `;
 

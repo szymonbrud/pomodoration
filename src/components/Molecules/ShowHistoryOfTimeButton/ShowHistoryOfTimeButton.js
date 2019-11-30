@@ -52,8 +52,16 @@ const StyledLine = styled.div`
 `;
 
 const ShowHistoryOfTimeButton = () => {
-  const minHeightSliding = (window.innerHeight / 20) * 19.3;
-  const maxHeightSliding = (window.innerHeight / 20) * 1;
+  let minHeightSliding;
+  let maxHeightSliding;
+
+  const getHeights = () => {
+    minHeightSliding = (window.innerHeight / 20) * 19.3;
+    maxHeightSliding = (window.innerHeight / 20) * 1;
+  };
+
+  getHeights();
+
   const [currentPositionOfSlide, setCurrentPositionOfSlide] = useState(minHeightSliding);
   const [active, setActive] = useState(false);
   const [animateSliding, setAnimateSliding] = useState(false);
@@ -63,6 +71,11 @@ const ShowHistoryOfTimeButton = () => {
   if (!downloadDataState) {
     dispatch(downloadSessions());
   }
+
+  window.addEventListener('resize', () => {
+    getHeights();
+    setCurrentPositionOfSlide(minHeightSliding);
+  });
 
   useEffect(() => {
     if (currentPositionOfSlide < (window.innerHeight / 20) * 19.2) {

@@ -159,14 +159,14 @@ const AboutTemplate = () => (
     </StyleTopBar>
     <StyledPositionGridWrapperForContent>
       {AboutInformationToMap.map(({ type, title, content }) => (
-        <StyledArticle>
+        <StyledArticle key={title}>
           <StyledTitleArt>{title}</StyledTitleArt>
           {type === 'article' ? (
             <StyledContentArt>{content}</StyledContentArt>
           ) : (
             <StyledContentListArt>
               {content.map(text => (
-                <StyledContentListItemArt>{text}</StyledContentListItemArt>
+                <StyledContentListItemArt key={text}>{text}</StyledContentListItemArt>
               ))}
             </StyledContentListArt>
           )}

@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import LoadingAnimation from 'components/Molecules/LoadingAnimation/LoadingAnimation';
 import media from 'assets/styles/media';
-import useTimer from './useTimer';
+import useTimer from 'hooks/useTimer';
 
 const StyledTimerWarpper = styled.div`
   width: 100%;

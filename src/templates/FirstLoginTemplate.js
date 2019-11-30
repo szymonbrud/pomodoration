@@ -7,7 +7,7 @@ import arrow from 'assets/icons/arrow.svg';
 import realTimeDatabase from 'assets/images/realTimeDatabase.svg';
 import { Redirect } from 'react-router-dom';
 import media from 'assets/styles/media';
-import useFirstLoginAnimation from './useFirstLoginAnimation';
+import useFirstLoginAnimation from 'hooks/useFirstLoginAnimation';
 import MainTemplate from './MainTemplate';
 
 const StyledMainTemplate = styled.div`
